@@ -1,0 +1,196 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    /**
+     * FIREBASE SECURITY RULES DOCUMENTATION
+     *
+     * Core Philosophy:
+     * This ruleset enforces a strict user-ownership model. Every piece of user-generated content 
+     * is nested under a top-level /users/{userId} document, where {userId} corresponds 
+     * to the Firebase Authentication UID.
+     *
+     * Data Structure:
+     * - /users/{userId}: Root profile and container for all personal data.
+     * - /users/{userId}/[subcollections]: Private data (meals, logs, oncology details, etc.).
+     * - /foodItems: Global, read-only reference library of nutritional information.
+     *
+     * Key Security Decisions:
+     * 1. Authorization Independence: All sub-documents denormalize the `userId` field. 
+     *    Rules verify that this internal field matches the path and the authenticated user.
+     * 2. Strict Privacy: No user can list or get documents belonging to another user.
+     * 3. Immutability: Critical relational fields (like `userId`) are protected from 
+     *    modification after creation.
+     * 4. Prototyping Flexibility: Data types and non-relational fields are not validated 
+     *    to allow for rapid schema evolution.
+     */
+
+    // --- Global Helper Functions ---
+
+    /** @description Checks if the request is from an authenticated user. */
+    function isSignedIn() {
+      return request.auth != null;
+    }
+
+    /** @description Checks if the authenticated user's UID matches the provided userId. */
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    /** @description Checks if the document exists and the authenticated user owns it. */
+    function isExistingOwner(userId) {
+      return resource != null && isOwner(userId);
+    }
+
+    /** @description Validates that the userId in the document matches the path during creation. */
+    function isValidOwnership(userId) {
+      return request.resource.data.userId == userId;
+    }
+
+    /** @description Ensures the ownership link cannot be changed during an update. */
+    function isOwnershipImmutable() {
+      return request.resource.data.userId == resource.data.userId;
+    }
+
+    // --- Collection Rules ---
+
+    /**
+     * @description Rules for the global, read-only food database.
+     * @path /foodItems/{foodItemId}
+     * @allow (get) Any authenticated user searching for a food item.
+     * @deny (create) Any user trying to add a new global food item (admin only, currently restricted).
+     * @principle Structural Segregation: Separates public reference data from private user data.
+     */
+    match /foodItems/{foodItemId} {
+      allow get, list: if isSignedIn();
+      allow create, update, delete: if false;
+    }
+
+    /**
+     * @description Rules for user profiles.
+     * @path /users/{userId}
+     * @allow (create) A user creating their own profile where the document ID matches their UID.
+     * @deny (update) A user trying to modify a profile they do not own.
+     * @principle Self-Creation: Root document access tied directly to Auth UID.
+     */
+    match /users/{userId} {
+      allow get, list: if isOwner(userId);
+      allow create: if isOwner(userId) && request.resource.data.id == userId;
+      allow update: if isExistingOwner(userId) && request.resource.data.id == resource.data.id;
+      allow delete: if isExistingOwner(userId);
+
+      /**
+       * @description Custom food items added by the user.
+       * @path /users/{userId}/userAddedFoodItems/{id}
+       * @allow (create) User adding a custom food item with their userId.
+       * @principle Authorization Independence: Uses denormalized userId for verification.
+       */
+      match /userAddedFoodItems/{id} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOwnership(userId);
+        allow update: if isExistingOwner(userId) && isOwnershipImmutable();
+        allow delete: if isExistingOwner(userId);
+      }
+
+      /**
+       * @description Daily meal entries for the user.
+       * @path /users/{userId}/mealEntries/{mealEntryId}
+       */
+      match /mealEntries/{mealEntryId} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOwnership(userId);
+        allow update: if isExistingOwner(userId) && isOwnershipImmutable();
+        allow delete: if isExistingOwner(userId);
+
+        /**
+         * @description Specific food logs within a meal entry.
+         * @path /users/{userId}/mealEntries/{mealEntryId}/foodLogs/{foodLogId}
+         * @principle Relational Integrity: Verifies connection to parent meal entry on creation.
+         */
+        match /foodLogs/{foodLogId} {
+          allow get, list: if isOwner(userId);
+          allow create: if isOwner(userId) && request.resource.data.mealEntryId == mealEntryId;
+          allow update: if isExistingOwner(userId) && request.resource.data.mealEntryId == resource.data.mealEntryId;
+          allow delete: if isExistingOwner(userId);
+        }
+      }
+
+      /**
+       * @description Tracking progress via weight measurements.
+       * @path /users/{userId}/weightMeasurements/{id}
+       */
+      match /weightMeasurements/{id} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOwnership(userId);
+        allow update: if isExistingOwner(userId) && isOwnershipImmutable();
+        allow delete: if isExistingOwner(userId);
+      }
+
+      /**
+       * @description Tracking progress via body measurements.
+       * @path /users/{userId}/bodyMeasurements/{id}
+       */
+      match /bodyMeasurements/{id} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOwnership(userId);
+        allow update: if isExistingOwner(userId) && isOwnershipImmutable();
+        allow delete: if isExistingOwner(userId);
+      }
+
+      /**
+       * @description Logs of AI interactions for nutrition advice.
+       * @path /users/{userId}/aiInteractions/{id}
+       */
+      match /aiInteractions/{id} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOwnership(userId);
+        allow update: if isExistingOwner(userId) && isOwnershipImmutable();
+        allow delete: if isExistingOwner(userId);
+      }
+
+      /**
+       * @description Specialist medical details for oncology patients.
+       * @path /users/{userId}/oncologyPatientDetails/{detailsId}
+       */
+      match /oncologyPatientDetails/{detailsId} {
+        allow get, list: if isOwner(userId);
+        allow create: if isOwner(userId) && isValidOwnership(userId);
+        allow update: if isExistingOwner(userId) && isOwnershipImmutable();
+        allow delete: if isExistingOwner(userId);
+
+        /**
+         * @description Tailored nutritional plans within the oncology module.
+         * @path /users/{userId}/oncologyPatientDetails/{detailsId}/nutritionalPlans/{planId}
+         */
+        match /nutritionalPlans/{planId} {
+          allow get, list: if isOwner(userId);
+          allow create: if isOwner(userId) && request.resource.data.patientId == detailsId;
+          allow update: if isExistingOwner(userId) && request.resource.data.patientId == resource.data.patientId;
+          allow delete: if isExistingOwner(userId);
+
+          /**
+           * @description Recommended foods for the specific oncology plan.
+           * @path /users/{userId}/oncologyPatientDetails/{detailsId}/nutritionalPlans/{planId}/recommendedFoods/{foodId}
+           */
+          match /recommendedFoods/{foodId} {
+            allow get, list: if isOwner(userId);
+            allow create: if isOwner(userId) && request.resource.data.planId == planId;
+            allow update: if isExistingOwner(userId) && request.resource.data.planId == resource.data.planId;
+            allow delete: if isExistingOwner(userId);
+          }
+        }
+
+        /**
+         * @description Exercise prescriptions provided by specialists.
+         * @path /users/{userId}/oncologyPatientDetails/{detailsId}/exercisePrescriptions/{id}
+         */
+        match /exercisePrescriptions/{id} {
+          allow get, list: if isOwner(userId);
+          allow create: if isOwner(userId) && request.resource.data.patientId == detailsId;
+          allow update: if isExistingOwner(userId) && request.resource.data.patientId == resource.data.patientId;
+          allow delete: if isExistingOwner(userId);
+        }
+      }
+    }
+  }
+}

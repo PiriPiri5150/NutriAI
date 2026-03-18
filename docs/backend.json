@@ -1,0 +1,1012 @@
+{
+  "entities": {
+    "UserProfile": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserProfile",
+      "type": "object",
+      "description": "Represents a user's personal profile, including physical attributes, activity level, and overall nutritional and fitness goals.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserProfile entity."
+        },
+        "heightCm": {
+          "type": "number",
+          "description": "User's height in centimeters."
+        },
+        "weightKg": {
+          "type": "number",
+          "description": "User's current weight in kilograms, used for TDEE calculation. Historical weights are stored in WeightMeasurement."
+        },
+        "ageYears": {
+          "type": "number",
+          "description": "User's age in years."
+        },
+        "sex": {
+          "type": "string",
+          "description": "User's biological sex (e.g., 'Male', 'Female', 'Other')."
+        },
+        "activityLevel": {
+          "type": "string",
+          "description": "User's physical activity level (e.g., 'Sedentary', 'Lightly Active', 'Moderately Active', 'Very Active')."
+        },
+        "goal": {
+          "type": "string",
+          "description": "User's primary fitness goal (e.g., 'Weight Loss', 'Muscle Gain', 'Maintenance', 'Performance Improvement')."
+        },
+        "dailyCaloricGoal": {
+          "type": "number",
+          "description": "Calculated or adjusted daily caloric intake goal in kilocalories."
+        },
+        "proteinGoalGrams": {
+          "type": "number",
+          "description": "Daily protein intake goal in grams."
+        },
+        "carbGoalGrams": {
+          "type": "number",
+          "description": "Daily carbohydrate intake goal in grams."
+        },
+        "fatGoalGrams": {
+          "type": "number",
+          "description": "Daily fat intake goal in grams."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the user profile was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the user profile was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "heightCm",
+        "weightKg",
+        "ageYears",
+        "sex",
+        "activityLevel",
+        "goal",
+        "dailyCaloricGoal",
+        "proteinGoalGrams",
+        "carbGoalGrams",
+        "fatGoalGrams",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FoodItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "FoodItem",
+      "type": "object",
+      "description": "Represents a generic, standardized food item with its nutritional information, typically from a predefined database.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the FoodItem entity."
+        },
+        "name": {
+          "type": "string",
+          "description": "Common name of the food item."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the food item or its category."
+        },
+        "caloriesPer100g": {
+          "type": "number",
+          "description": "Calories per 100 grams or 100 milliliters of the food item."
+        },
+        "proteinPer100g": {
+          "type": "number",
+          "description": "Protein content per 100 grams or 100 milliliters."
+        },
+        "carbsPer100g": {
+          "type": "number",
+          "description": "Carbohydrate content per 100 grams or 100 milliliters."
+        },
+        "fatPer100g": {
+          "type": "number",
+          "description": "Fat content per 100 grams or 100 milliliters."
+        },
+        "servingUnit": {
+          "type": "string",
+          "description": "The common unit for serving size (e.g., 'g', 'ml', 'unit', 'piece')."
+        },
+        "servingSizeGramOrMl": {
+          "type": "number",
+          "description": "Optional, typical serving size in grams or milliliters for reference."
+        },
+        "barcode": {
+          "type": "string",
+          "description": "Optional barcode for the food item, used for quick scanning."
+        }
+      },
+      "required": [
+        "id",
+        "name",
+        "description",
+        "caloriesPer100g",
+        "proteinPer100g",
+        "carbsPer100g",
+        "fatPer100g",
+        "servingUnit"
+      ]
+    },
+    "UserAddedFoodItem": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "UserAddedFoodItem",
+      "type": "object",
+      "description": "Represents a custom food item added by a specific user, with its nutritional information.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the UserAddedFoodItem entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N UserAddedFoodItem)"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the custom food item."
+        },
+        "description": {
+          "type": "string",
+          "description": "A brief description of the custom food item."
+        },
+        "caloriesPer100g": {
+          "type": "number",
+          "description": "Calories per 100 grams or 100 milliliters of the custom food item."
+        },
+        "proteinPer100g": {
+          "type": "number",
+          "description": "Protein content per 100 grams or 100 milliliters."
+        },
+        "carbsPer100g": {
+          "type": "number",
+          "description": "Carbohydrate content per 100 grams or 100 milliliters."
+        },
+        "fatPer100g": {
+          "type": "number",
+          "description": "Fat content per 100 grams or 100 milliliters."
+        },
+        "servingUnit": {
+          "type": "string",
+          "description": "The common unit for serving size (e.g., 'g', 'ml', 'unit', 'piece')."
+        },
+        "servingSizeGramOrMl": {
+          "type": "number",
+          "description": "Optional, typical serving size in grams or milliliters for reference."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the custom food item was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the custom food item was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "name",
+        "description",
+        "caloriesPer100g",
+        "proteinPer100g",
+        "carbsPer100g",
+        "fatPer100g",
+        "servingUnit",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "MealEntry": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "MealEntry",
+      "type": "object",
+      "description": "Represents a single meal logged by a user, such as breakfast, lunch, or a snack, at a specific time.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the MealEntry entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N MealEntry)"
+        },
+        "mealType": {
+          "type": "string",
+          "description": "The type of meal (e.g., 'Breakfast', 'Lunch', 'Dinner', 'Snack')."
+        },
+        "mealDate": {
+          "type": "string",
+          "description": "Date and time when the meal was consumed.",
+          "format": "date-time"
+        },
+        "totalCalories": {
+          "type": "number",
+          "description": "The calculated total calories for all food items within this meal entry."
+        },
+        "totalProteinGrams": {
+          "type": "number",
+          "description": "The calculated total protein in grams for all food items within this meal entry."
+        },
+        "totalCarbsGrams": {
+          "type": "number",
+          "description": "The calculated total carbohydrates in grams for all food items within this meal entry."
+        },
+        "totalFatGrams": {
+          "type": "number",
+          "description": "The calculated total fat in grams for all food items within this meal entry."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the meal entry was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the meal entry was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "mealType",
+        "mealDate",
+        "totalCalories",
+        "totalProteinGrams",
+        "totalCarbsGrams",
+        "totalFatGrams",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "FoodLog": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "FoodLog",
+      "type": "object",
+      "description": "Represents a single food item consumed as part of a MealEntry, including quantity and calculated nutritional values.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the FoodLog entity."
+        },
+        "mealEntryId": {
+          "type": "string",
+          "description": "Reference to MealEntry. (Relationship: MealEntry 1:N FoodLog)"
+        },
+        "foodSourceId": {
+          "type": "string",
+          "description": "Reference to the source food item, either FoodItem or UserAddedFoodItem."
+        },
+        "foodSourceType": {
+          "type": "string",
+          "description": "Specifies the type of the food source (e.g., 'FoodItem', 'UserAddedFoodItem')."
+        },
+        "quantity": {
+          "type": "number",
+          "description": "The quantity of the food item consumed (e.g., in grams, ml, or units)."
+        },
+        "unit": {
+          "type": "string",
+          "description": "The unit of the quantity (e.g., 'g', 'ml', 'unit', 'piece')."
+        },
+        "calculatedCalories": {
+          "type": "number",
+          "description": "The calculated calories for the consumed quantity of the food item."
+        },
+        "calculatedProteinGrams": {
+          "type": "number",
+          "description": "The calculated protein in grams for the consumed quantity of the food item."
+        },
+        "calculatedCarbsGrams": {
+          "type": "number",
+          "description": "The calculated carbohydrates in grams for the consumed quantity of the food item."
+        },
+        "calculatedFatGrams": {
+          "type": "number",
+          "description": "The calculated fat in grams for the consumed quantity of the food item."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the food log entry was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "mealEntryId",
+        "foodSourceId",
+        "foodSourceType",
+        "quantity",
+        "unit",
+        "calculatedCalories",
+        "calculatedProteinGrams",
+        "calculatedCarbsGrams",
+        "calculatedFatGrams",
+        "createdAt"
+      ]
+    },
+    "WeightMeasurement": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "WeightMeasurement",
+      "type": "object",
+      "description": "Records a user's weight at a specific point in time, allowing for progress tracking.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the WeightMeasurement entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N WeightMeasurement)"
+        },
+        "weightKg": {
+          "type": "number",
+          "description": "The recorded weight in kilograms."
+        },
+        "measurementDate": {
+          "type": "string",
+          "description": "Date and time when the weight was measured.",
+          "format": "date-time"
+        },
+        "notes": {
+          "type": "string",
+          "description": "Optional notes related to the weight measurement."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the weight measurement was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "weightKg",
+        "measurementDate",
+        "createdAt"
+      ]
+    },
+    "BodyMeasurement": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "BodyMeasurement",
+      "type": "object",
+      "description": "Records various body measurements (e.g., waist, chest) over time for progress tracking.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the BodyMeasurement entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N BodyMeasurement)"
+        },
+        "measurementType": {
+          "type": "string",
+          "description": "The type of body measurement (e.g., 'Waist', 'Chest', 'Arm', 'Thigh')."
+        },
+        "valueCm": {
+          "type": "number",
+          "description": "The recorded measurement value in centimeters."
+        },
+        "measurementDate": {
+          "type": "string",
+          "description": "Date and time when the body measurement was taken.",
+          "format": "date-time"
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the body measurement was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "measurementType",
+        "valueCm",
+        "measurementDate",
+        "createdAt"
+      ]
+    },
+    "AIInteraction": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "AIInteraction",
+      "type": "object",
+      "description": "Logs interactions between the user and the AI Virtual Nutritionist, including prompts and responses.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the AIInteraction entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to UserProfile. (Relationship: UserProfile 1:N AIInteraction)"
+        },
+        "interactionTimestamp": {
+          "type": "string",
+          "description": "Date and time of the interaction.",
+          "format": "date-time"
+        },
+        "prompt": {
+          "type": "string",
+          "description": "The user's input or question to the AI."
+        },
+        "response": {
+          "type": "string",
+          "description": "The AI's generated response, summary, or suggestion."
+        },
+        "interactionType": {
+          "type": "string",
+          "description": "The type of interaction (e.g., 'DailySummary', 'MealSuggestion', 'QuestionAndAnswer')."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the AI interaction log was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "interactionTimestamp",
+        "prompt",
+        "response",
+        "interactionType",
+        "createdAt"
+      ]
+    },
+    "OncologyPatientDetails": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "OncologyPatientDetails",
+      "type": "object",
+      "description": "Stores specific medical and physiological details for users identified as oncology patients.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the OncologyPatientDetails entity."
+        },
+        "userId": {
+          "type": "string",
+          "description": "Reference to UserProfile for the patient. (Relationship: UserProfile 1:1 OncologyPatientDetails)"
+        },
+        "diagnosis": {
+          "type": "string",
+          "description": "The patient's cancer diagnosis."
+        },
+        "treatmentStage": {
+          "type": "string",
+          "description": "The current stage of cancer treatment (e.g., 'Active Treatment', 'Remission', 'Palliative Care')."
+        },
+        "diagnosisDate": {
+          "type": "string",
+          "description": "Date of cancer diagnosis.",
+          "format": "date"
+        },
+        "vo2MaxMlPerKgPerMin": {
+          "type": "number",
+          "description": "Calculated or measured VO2 max in milliliters per kilogram per minute."
+        },
+        "exerciseLoadRecommendation": {
+          "type": "string",
+          "description": "Textual recommendation or summary for exercise load based on physiological analysis."
+        },
+        "kinesiologicalData": {
+          "type": "string",
+          "description": "Specific kinesiological data relevant to the patient's condition and exercise capacity."
+        },
+        "medicalNotes": {
+          "type": "string",
+          "description": "General medical notes or important considerations for the patient."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the oncology patient details were created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the oncology patient details were last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "userId",
+        "diagnosis",
+        "treatmentStage",
+        "diagnosisDate",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "OncologyNutritionalPlan": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "OncologyNutritionalPlan",
+      "type": "object",
+      "description": "Defines a specific nutritional plan tailored for an oncology patient, including overall goals and dietary considerations.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the OncologyNutritionalPlan entity."
+        },
+        "patientId": {
+          "type": "string",
+          "description": "Reference to OncologyPatientDetails. (Relationship: OncologyPatientDetails 1:N OncologyNutritionalPlan)"
+        },
+        "planName": {
+          "type": "string",
+          "description": "A descriptive name for the nutritional plan (e.g., 'High Protein Recovery Plan')."
+        },
+        "startDate": {
+          "type": "string",
+          "description": "The date when the nutritional plan begins.",
+          "format": "date"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "The date when the nutritional plan is scheduled to end.",
+          "format": "date"
+        },
+        "description": {
+          "type": "string",
+          "description": "Detailed description of the nutritional plan's purpose and strategy."
+        },
+        "targetCalories": {
+          "type": "number",
+          "description": "Target daily caloric intake for this plan."
+        },
+        "targetProteinGrams": {
+          "type": "number",
+          "description": "Target daily protein intake in grams for this plan."
+        },
+        "targetCarbsGrams": {
+          "type": "number",
+          "description": "Target daily carbohydrate intake in grams for this plan."
+        },
+        "targetFatGrams": {
+          "type": "number",
+          "description": "Target daily fat intake in grams for this plan."
+        },
+        "specialDietaryConsiderations": {
+          "type": "string",
+          "description": "Specific dietary notes, allergies, or restrictions relevant to the patient's condition (e.g., 'Soft diet', 'Lactose-free')."
+        },
+        "prescribingSpecialist": {
+          "type": "string",
+          "description": "Optional: Name or identifier of the specialist who prescribed this plan."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the nutritional plan was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the nutritional plan was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "patientId",
+        "planName",
+        "startDate",
+        "endDate",
+        "description",
+        "targetCalories",
+        "targetProteinGrams",
+        "targetCarbsGrams",
+        "targetFatGrams",
+        "specialDietaryConsiderations",
+        "createdAt",
+        "updatedAt"
+      ]
+    },
+    "OncologyRecommendedFood": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "OncologyRecommendedFood",
+      "type": "object",
+      "description": "Details specific food item recommendations or categories within an OncologyNutritionalPlan.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the OncologyRecommendedFood entity."
+        },
+        "planId": {
+          "type": "string",
+          "description": "Reference to OncologyNutritionalPlan. (Relationship: OncologyNutritionalPlan 1:N OncologyRecommendedFood)"
+        },
+        "foodSourceId": {
+          "type": "string",
+          "description": "Optional: Reference to a specific FoodItem or UserAddedFoodItem being recommended."
+        },
+        "foodSourceType": {
+          "type": "string",
+          "description": "Specifies the type of the food source (e.g., 'FoodItem', 'UserAddedFoodItem', 'GeneralCategory')."
+        },
+        "generalFoodCategory": {
+          "type": "string",
+          "description": "If not linking to a specific food, describes a general food category (e.g., 'Lean Protein', 'Cooked Vegetables')."
+        },
+        "recommendedQuantity": {
+          "type": "number",
+          "description": "The recommended quantity of the food item or category."
+        },
+        "recommendedUnit": {
+          "type": "string",
+          "description": "The unit for the recommended quantity (e.g., 'g', 'ml', 'portion', 'cup')."
+        },
+        "mealTypeSuggestion": {
+          "type": "string",
+          "description": "Suggested meal context for this food (e.g., 'Breakfast', 'Snack', 'Lunch', 'Anytime')."
+        },
+        "preparationNotes": {
+          "type": "string",
+          "description": "Specific notes on how the food should be prepared (e.g., 'Pureed', 'Soft cooked', 'Serve warm')."
+        },
+        "nutritionalGuidance": {
+          "type": "string",
+          "description": "Brief explanation of the nutritional benefit or reason for recommendation."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the food recommendation was created.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "planId",
+        "recommendedQuantity",
+        "recommendedUnit",
+        "mealTypeSuggestion",
+        "createdAt"
+      ]
+    },
+    "ExercisePrescription": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "ExercisePrescription",
+      "type": "object",
+      "description": "Stores exercise prescriptions from specialists, particularly for oncology patients.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the ExercisePrescription entity."
+        },
+        "patientId": {
+          "type": "string",
+          "description": "Reference to OncologyPatientDetails. (Relationship: OncologyPatientDetails 1:N ExercisePrescription)"
+        },
+        "prescribingSpecialist": {
+          "type": "string",
+          "description": "Name or identifier of the specialist who provided the prescription."
+        },
+        "prescriptionDate": {
+          "type": "string",
+          "description": "Date when the exercise prescription was issued.",
+          "format": "date"
+        },
+        "documentReferenceUri": {
+          "type": "string",
+          "description": "Optional URI to an external document or PDF of the full prescription.",
+          "format": "uri"
+        },
+        "exerciseType": {
+          "type": "string",
+          "description": "Type of exercise prescribed (e.g., 'Aerobic', 'Resistance', 'Flexibility')."
+        },
+        "intensityLevel": {
+          "type": "string",
+          "description": "Recommended intensity level (e.g., 'Low', 'Moderate', 'High')."
+        },
+        "durationMinutesPerSession": {
+          "type": "number",
+          "description": "Recommended duration in minutes per exercise session."
+        },
+        "frequencyPerWeek": {
+          "type": "number",
+          "description": "Recommended frequency of exercise sessions per week."
+        },
+        "notes": {
+          "type": "string",
+          "description": "Any additional notes, contraindications, or specific instructions for the exercise plan."
+        },
+        "createdAt": {
+          "type": "string",
+          "description": "Timestamp when the exercise prescription was created.",
+          "format": "date-time"
+        },
+        "updatedAt": {
+          "type": "string",
+          "description": "Timestamp when the exercise prescription was last updated.",
+          "format": "date-time"
+        }
+      },
+      "required": [
+        "id",
+        "patientId",
+        "prescribingSpecialist",
+        "prescriptionDate",
+        "exerciseType",
+        "intensityLevel",
+        "durationMinutesPerSession",
+        "frequencyPerWeek",
+        "createdAt",
+        "updatedAt"
+      ]
+    }
+  },
+  "auth": {
+    "providers": [
+      "password",
+      "anonymous"
+    ]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "UserProfile",
+          "schema": {
+            "$ref": "#/backend/entities/UserProfile"
+          },
+          "description": "Stores the personal profile and nutritional/fitness goals for a specific user. Owned by the user with {userId}.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the user (Firebase Auth UID)."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/foodItems/{foodItemId}",
+        "definition": {
+          "entityName": "FoodItem",
+          "schema": {
+            "$ref": "#/backend/entities/FoodItem"
+          },
+          "description": "A global, read-only collection of standardized food items and their nutritional data. Accessible by all authenticated users for search and selection.",
+          "params": [
+            {
+              "name": "foodItemId",
+              "description": "The unique identifier of the generic food item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/userAddedFoodItems/{userAddedFoodItemId}",
+        "definition": {
+          "entityName": "UserAddedFoodItem",
+          "schema": {
+            "$ref": "#/backend/entities/UserAddedFoodItem"
+          },
+          "description": "Custom food items created and owned by a specific user. Includes denormalized 'userId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "userAddedFoodItemId",
+              "description": "The unique identifier of the custom food item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/mealEntries/{mealEntryId}",
+        "definition": {
+          "entityName": "MealEntry",
+          "schema": {
+            "$ref": "#/backend/entities/MealEntry"
+          },
+          "description": "A log of meals consumed by a specific user. Includes denormalized 'userId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "mealEntryId",
+              "description": "The unique identifier of the meal entry."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/mealEntries/{mealEntryId}/foodLogs/{foodLogId}",
+        "definition": {
+          "entityName": "FoodLog",
+          "schema": {
+            "$ref": "#/backend/entities/FoodLog"
+          },
+          "description": "Individual food items logged as part of a specific meal entry. Includes denormalized 'userId' and 'mealEntryId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "mealEntryId",
+              "description": "The unique identifier of the parent meal entry."
+            },
+            {
+              "name": "foodLogId",
+              "description": "The unique identifier of the food log item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/weightMeasurements/{weightMeasurementId}",
+        "definition": {
+          "entityName": "WeightMeasurement",
+          "schema": {
+            "$ref": "#/backend/entities/WeightMeasurement"
+          },
+          "description": "Historical weight measurements recorded by a specific user. Includes denormalized 'userId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "weightMeasurementId",
+              "description": "The unique identifier of the weight measurement."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/bodyMeasurements/{bodyMeasurementId}",
+        "definition": {
+          "entityName": "BodyMeasurement",
+          "schema": {
+            "$ref": "#/backend/entities/BodyMeasurement"
+          },
+          "description": "Historical body measurements recorded by a specific user. Includes denormalized 'userId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "bodyMeasurementId",
+              "description": "The unique identifier of the body measurement."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/aiInteractions/{aiInteractionId}",
+        "definition": {
+          "entityName": "AIInteraction",
+          "schema": {
+            "$ref": "#/backend/entities/AIInteraction"
+          },
+          "description": "Logs of interactions between a user and the AI Virtual Nutritionist. Includes denormalized 'userId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "aiInteractionId",
+              "description": "The unique identifier of the AI interaction log."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/oncologyPatientDetails/{oncologyPatientDetailsId}",
+        "definition": {
+          "entityName": "OncologyPatientDetails",
+          "schema": {
+            "$ref": "#/backend/entities/OncologyPatientDetails"
+          },
+          "description": "Specific medical and physiological details for users identified as oncology patients. Stored as a subcollection of the user's profile. Includes denormalized 'userId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "oncologyPatientDetailsId",
+              "description": "The unique identifier for the oncology patient details (1:1 with user profile)."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/oncologyPatientDetails/{oncologyPatientDetailsId}/nutritionalPlans/{nutritionalPlanId}",
+        "definition": {
+          "entityName": "OncologyNutritionalPlan",
+          "schema": {
+            "$ref": "#/backend/entities/OncologyNutritionalPlan"
+          },
+          "description": "Nutritional plans tailored for a specific oncology patient. Stored as a subcollection of the patient's details. Includes denormalized 'userId' and 'patientId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "oncologyPatientDetailsId",
+              "description": "The unique identifier of the parent oncology patient details."
+            },
+            {
+              "name": "nutritionalPlanId",
+              "description": "The unique identifier for the oncology nutritional plan."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/oncologyPatientDetails/{oncologyPatientDetailsId}/nutritionalPlans/{nutritionalPlanId}/recommendedFoods/{recommendedFoodId}",
+        "definition": {
+          "entityName": "OncologyRecommendedFood",
+          "schema": {
+            "$ref": "#/backend/entities/OncologyRecommendedFood"
+          },
+          "description": "Specific food item recommendations or categories within an oncology nutritional plan. Includes denormalized 'userId', 'patientId', and 'planId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "oncologyPatientDetailsId",
+              "description": "The unique identifier of the parent oncology patient details."
+            },
+            {
+              "name": "nutritionalPlanId",
+              "description": "The unique identifier of the parent nutritional plan."
+            },
+            {
+              "name": "recommendedFoodId",
+              "description": "The unique identifier for the oncology recommended food item."
+            }
+          ]
+        }
+      },
+      {
+        "path": "/users/{userId}/oncologyPatientDetails/{oncologyPatientDetailsId}/exercisePrescriptions/{exercisePrescriptionId}",
+        "definition": {
+          "entityName": "ExercisePrescription",
+          "schema": {
+            "$ref": "#/backend/entities/ExercisePrescription"
+          },
+          "description": "Exercise prescriptions from specialists, specifically for oncology patients. Stored as a subcollection of the patient's details. Includes denormalized 'userId' and 'patientId' for authorization independence. Requires userId to match request.auth.uid for full access.",
+          "params": [
+            {
+              "name": "userId",
+              "description": "The unique identifier of the owning user."
+            },
+            {
+              "name": "oncologyPatientDetailsId",
+              "description": "The unique identifier of the parent oncology patient details."
+            },
+            {
+              "name": "exercisePrescriptionId",
+              "description": "The unique identifier for the exercise prescription."
+            }
+          ]
+        }
+      }
+    ],
+    "reasoning": "The Firestore data structure is designed to adhere strictly to the core design principles, especially Authorization Independence (CRITICAL), Structural Segregation, and consistent Access Modeling. All user-specific data is nested under a top-level `/users/{userId}` collection, using the authenticated user's UID as the document ID for their profile (`/users/{userId}`). This path-based ownership immediately satisfies secure `list` operations (QAPs) because a user can only query and access documents within their own `/users/{request.auth.uid}/...` subtree.\n\n**Authorization Independence via Denormalization (Mandate A):**\nTo eliminate the need for `get()` calls in security rules and enable atomic operations, all subcollection documents (`UserAddedFoodItem`, `MealEntry`, `FoodLog`, `WeightMeasurement`, `BodyMeasurement`, `AIInteraction`) explicitly include the `userId` field. This ensures that a rule can simply check `request.auth.uid == resource.data.userId` without performing costly and potentially non-atomic lookups to parent documents. For the nested oncology module, `OncologyNutritionalPlan` documents will contain `userId` and `patientId`, and `OncologyRecommendedFood` documents will contain `userId`, `patientId`, and `planId`. Similarly, `ExercisePrescription` documents will include `userId` and `patientId`. This denormalization guarantees that authorization can be determined solely by inspecting the document being accessed, fulfilling Mandate A and simplifying security rule logic.\n\n**Structural Segregation (Mandate B) and QAPs:**\n*   **Private User Data:** All personal data (`UserProfile`, `UserAddedFoodItem`, `MealEntry`, `FoodLog`, `WeightMeasurement`, `BodyMeasurement`, `AIInteraction`) is segregated into subcollections under `/users/{userId}`, ensuring homogeneous security requirements (owner-only access). This design naturally supports QAPs for private data, as `list` queries are implicitly scoped to the `userId` in the path, and further validated by the denormalized `userId` field.\n*   **Global Data:** `FoodItem` is a global, read-only collection (`/foodItems/{foodItemId}`), intended for universal access by authenticated users. This separation prevents mixing public and private data, simplifying its security rules (e.g., `allow read: if request.auth.uid != null`). This is also a QAP, as `list` operations are open for all authenticated users to query the global food database.\n*   **Oncology Module:** The oncology module data (`OncologyPatientDetails`, `OncologyNutritionalPlan`, `OncologyRecommendedFood`, `ExercisePrescription`) is also structured as subcollections under the specific user's path (`/users/{userId}/oncologyPatientDetails/{oncologyPatientDetailsId}/...`). This maintains strict user ownership, allowing the user to manage their specialized medical and nutritional data, and provides the necessary CRUD functionality for nutrition plans as requested by the user, while benefiting from the same strong authorization independence through denormalization.\n\n**Access Modeling (Mandate C):**\nThe design primarily uses **Path-Based Ownership** for all user-specific data, leveraging the `/users/{userId}/...` hierarchy. The denormalization of `userId` (and parent IDs) into subcollection documents reinforces this ownership pattern, making rules concise and explicit.\n\nOverall, this structure provides a secure, scalable, and highly debuggable Firestore schema, optimizing for simple and robust security rules by prioritizing authorization independence and structural clarity."
+  }
+}
