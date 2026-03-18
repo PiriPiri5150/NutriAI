@@ -31,7 +31,7 @@ export default function Home() {
             <span className="ml-2 text-xl font-bold font-headline text-primary">NutriAI</span>
           </Link>
         </div>
-        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6" aria-label="Navegação de topo">
           <Link className="hidden sm:inline-block text-sm font-medium hover:underline underline-offset-4" href="/dashboard">
             Painel
           </Link>

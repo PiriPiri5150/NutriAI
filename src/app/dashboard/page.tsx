@@ -45,17 +45,17 @@ export default function DashboardPage() {
             <Progress value={41} className="h-3" aria-label="Progresso de calorias totais do dia" />
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
-                <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Proteína</div>
+                <h3 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Proteína</h3>
                 <div className="font-semibold">82g / 150g</div>
                 <Progress value={54} className="h-1 mt-1" aria-label="Progresso de ingestão de proteína" />
               </div>
               <div className="text-center">
-                <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Carbs</div>
+                <h3 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Carbs</h3>
                 <div className="font-semibold">120g / 220g</div>
                 <Progress value={54} className="h-1 mt-1" aria-label="Progresso de ingestão de hidratos de carbono" />
               </div>
               <div className="text-center">
-                <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Gordura</div>
+                <h3 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Gordura</h3>
                 <div className="font-semibold">35g / 70g</div>
                 <Progress value={50} className="h-1 mt-1" aria-label="Progresso de ingestão de gordura" />
               </div>
@@ -97,7 +97,7 @@ export default function DashboardPage() {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <Card>
           <CardHeader className="flex flex-row items-center justify-between">
-            <CardTitle>Últimas Refeições</CardTitle>
+            <CardTitle className="text-xl">Últimas Refeições</CardTitle>
             <Link href="/diary">
               <Button variant="ghost" size="sm">Ver tudo</Button>
             </Link>
@@ -130,7 +130,7 @@ export default function DashboardPage() {
 
         <Card>
           <CardHeader>
-            <CardTitle>Módulo Oncológico Especializado</CardTitle>
+            <CardTitle className="text-xl">Módulo Oncológico Especializado</CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
             <div className="flex gap-4 p-4 rounded-xl border bg-white shadow-sm">

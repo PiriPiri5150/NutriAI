@@ -72,7 +72,7 @@ export default function DiaryPage() {
       <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
         <Card className="md:col-span-3">
           <CardHeader className="pb-2">
-            <CardTitle>Hoje</CardTitle>
+            <CardTitle className="text-2xl">Hoje</CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
             {meals.map((meal) => (
@@ -116,7 +116,7 @@ export default function DiaryPage() {
         <div className="space-y-6">
           <Card>
             <CardHeader>
-              <CardTitle className="text-base">Resumo Nutricional</CardTitle>
+              <CardTitle className="text-lg">Resumo Nutricional</CardTitle>
             </CardHeader>
             <CardContent className="space-y-4">
               <div className="space-y-2">
@@ -124,28 +124,28 @@ export default function DiaryPage() {
                   <span>Energia</span>
                   <span className="font-bold">785 / 2100 kcal</span>
                 </div>
-                <Progress value={37} className="h-2" aria-label="Resumo de calorias totais" />
+                <Progress value={37} className="h-2" aria-label="Resumo de calorias totais do dia" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Proteína</span>
                   <span className="font-bold">69 / 150g</span>
                 </div>
-                <Progress value={46} className="h-2" aria-label="Resumo de proteína total" />
+                <Progress value={46} className="h-2" aria-label="Resumo de ingestão de proteína total" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Carbs</span>
                   <span className="font-bold">68 / 220g</span>
                 </div>
-                <Progress value={31} className="h-2" aria-label="Resumo de hidratos de carbono totais" />
+                <Progress value={31} className="h-2" aria-label="Resumo de ingestão de hidratos de carbono total" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Gordura</span>
                   <span className="font-bold">23 / 70g</span>
                 </div>
-                <Progress value={33} className="h-2" aria-label="Resumo de gorduras totais" />
+                <Progress value={33} className="h-2" aria-label="Resumo de ingestão de gordura total" />
               </div>
             </CardContent>
           </Card>
