@@ -138,7 +138,7 @@ export default function DashboardPage() {
                 <Activity className="h-6 w-6 text-accent-foreground" aria-hidden="true" />
               </div>
               <div>
-                <h3 className="font-bold text-lg">Análise de Performance</h3>
+                <h2 className="font-bold text-lg">Análise de Performance</h2>
                 <p className="text-sm text-muted-foreground">
                   Acompanhe métricas de VO2 max e carga de treino adaptada.
                 </p>
