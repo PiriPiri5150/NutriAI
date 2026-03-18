@@ -1,9 +1,10 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 import { Card, CardContent, CardHeader, CardTitle, CardDescription } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { Activity, ShieldCheck, FileText, Info, Plus, Apple, Trash2, Calendar as CalendarIcon, Utensils } from 'lucide-react';
+import { Activity, ShieldCheck, FileText, Info, Plus, Apple, Trash2, Calendar as CalendarIcon, Utensils, LogIn } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
@@ -11,11 +12,10 @@ import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useUser, useFirestore, useCollection, useMemoFirebase, addDocumentNonBlocking, deleteDocumentNonBlocking } from '@/firebase';
-import { collection, doc, serverTimestamp } from 'firebase/firestore';
-import { format } from 'date-fns';
+import { collection, doc } from 'firebase/firestore';
 
 export default function OncologyPage() {
-  const { user } = useUser();
+  const { user, isUserLoading } = useUser();
   const firestore = useFirestore();
   const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
 
@@ -99,10 +99,27 @@ export default function OncologyPage() {
     deleteDocumentNonBlocking(foodRef);
   };
 
+  if (isUserLoading) {
+    return (
+      <div className="h-screen flex items-center justify-center">
+        <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+      </div>
+    );
+  }
+
   if (!user) {
     return (
-      <div className="p-8 text-center">
-        <h1 className="text-2xl font-bold">Por favor, faça login para aceder a este módulo.</h1>
+      <div className="min-h-screen flex flex-col items-center justify-center p-8 bg-background text-center">
+        <ShieldCheck className="h-16 w-16 text-primary/20 mb-4" />
+        <h1 className="text-3xl font-bold font-headline mb-4">Acesso Restrito</h1>
+        <p className="text-muted-foreground max-w-md mb-8">
+          Para aceder ao seu acompanhamento oncológico personalizado, por favor autentique-se na plataforma NutriAI.
+        </p>
+        <Link href="/login">
+          <Button size="lg" className="gap-2">
+            <LogIn className="h-5 w-5" /> Iniciar Sessão
+          </Button>
+        </Link>
       </div>
     );
   }

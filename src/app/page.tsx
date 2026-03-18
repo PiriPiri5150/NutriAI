@@ -1,17 +1,28 @@
+'use client';
+
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Activity, Apple, BrainCircuit, LineChart, ShieldCheck } from 'lucide-react';
+import { Activity, Apple, BrainCircuit, ShieldCheck, LogOut, User } from 'lucide-react';
+import { useUser, useAuth } from '@/firebase';
+import { signOut } from 'firebase/auth';
 
 export default function Home() {
+  const { user } = useUser();
+  const auth = useAuth();
+
+  const handleLogout = () => {
+    signOut(auth);
+  };
+
   return (
     <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
+      <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
         <Link className="flex items-center justify-center" href="/">
           <BrainCircuit className="h-6 w-6 text-primary" />
           <span className="ml-2 text-xl font-bold font-headline text-primary">NutriAI</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
+        <nav className="ml-auto flex items-center gap-4 sm:gap-6">
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="/dashboard">
             Painel
           </Link>
@@ -21,11 +32,30 @@ export default function Home() {
           <Link className="text-sm font-medium hover:underline underline-offset-4" href="/oncology">
             Oncologia
           </Link>
+          {user ? (
+            <div className="flex items-center gap-3 ml-2 pl-4 border-l">
+              <div className="hidden sm:flex flex-col items-end">
+                <span className="text-xs font-bold text-primary">{user.email || 'Utilizador'}</span>
+                <button onClick={handleLogout} className="text-[10px] text-destructive hover:underline flex items-center gap-1">
+                  <LogOut className="h-3 w-3" /> Sair
+                </button>
+              </div>
+              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
+                <User className="h-4 w-4 text-primary" />
+              </div>
+            </div>
+          ) : (
+            <Link href="/login" className="ml-2">
+              <Button size="sm" className="gap-2">
+                Entrar
+              </Button>
+            </Link>
+          )}
         </nav>
       </header>
       <main className="flex-1">
         <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-white">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="grid gap-6 lg:grid-cols-[1fr_400px] lg:gap-12 xl:grid-cols-[1fr_600px]">
               <div className="flex flex-col justify-center space-y-4">
                 <div className="space-y-2">
@@ -37,7 +67,7 @@ export default function Home() {
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
-                  <Link href="/dashboard">
+                  <Link href={user ? "/dashboard" : "/login"}>
                     <Button size="lg" className="bg-primary hover:bg-primary/90">
                       Começar Agora
                     </Button>
@@ -55,7 +85,6 @@ export default function Home() {
                     alt="NutriAI Hero"
                     className="object-cover w-full h-full"
                     src="https://picsum.photos/seed/nutriai/800/800"
-                    data-ai-hint="healthy lifestyle"
                   />
                 </div>
               </div>
@@ -64,7 +93,7 @@ export default function Home() {
         </section>
         
         <section className="w-full py-12 md:py-24 lg:py-32 bg-background">
-          <div className="container px-4 md:px-6">
+          <div className="container px-4 md:px-6 mx-auto">
             <div className="flex flex-col items-center justify-center space-y-4 text-center">
               <div className="space-y-2">
                 <h2 className="text-3xl font-bold tracking-tighter md:text-4xl text-primary font-headline">Funcionalidades Core</h2>
