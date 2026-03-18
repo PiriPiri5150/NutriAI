@@ -14,7 +14,9 @@ import {
   BrainCircuit, 
   CheckCircle2, 
   ExternalLink,
-  Info
+  Info,
+  Smartphone,
+  Unlink
 } from 'lucide-react';
 import Link from 'next/link';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -45,6 +47,14 @@ export default function DashboardPage() {
         description: "Os teus dados da Xiaomi Mi Fit serão agora sincronizados via Google Fit.",
       });
     }, 1500);
+  };
+
+  const handleDisconnect = () => {
+    setIsXiaomiConnected(false);
+    toast({
+      title: "Dispositivo Desligado",
+      description: "A sincronização com a Xiaomi Mi Fitness foi interrompida.",
+    });
   };
 
   return (
@@ -84,7 +94,7 @@ export default function DashboardPage() {
             <Progress 
               value={41} 
               className="h-3" 
-              aria-label="Progresso de calorias totais do dia: 41%" 
+              aria-label="Progresso de calorias totais: 41% consumido de 2100 kcal" 
             />
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
@@ -93,7 +103,7 @@ export default function DashboardPage() {
                 <Progress 
                   value={54} 
                   className="h-1.5 mt-2" 
-                  aria-label="Progresso de proteína: 54%" 
+                  aria-label="Progresso de proteína: 54% da meta de 150g" 
                 />
               </div>
               <div className="text-center">
@@ -102,7 +112,7 @@ export default function DashboardPage() {
                 <Progress 
                   value={54} 
                   className="h-1.5 mt-2" 
-                  aria-label="Progresso de hidratos de carbono: 54%" 
+                  aria-label="Progresso de hidratos de carbono: 54% da meta de 220g" 
                 />
               </div>
               <div className="text-center">
@@ -111,7 +121,7 @@ export default function DashboardPage() {
                 <Progress 
                   value={50} 
                   className="h-1.5 mt-2" 
-                  aria-label="Progresso de gordura: 50%" 
+                  aria-label="Progresso de gordura: 50% da meta de 70g" 
                 />
               </div>
             </div>
@@ -125,11 +135,11 @@ export default function DashboardPage() {
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
-            <p className="text-sm leading-relaxed">
+            <p className="text-sm leading-relaxed text-muted-foreground">
               "Você está um pouco baixo em proteína hoje. Sugiro um snack de iogurte grego ou uma dose de whey para atingir a sua meta de recuperação muscular."
             </p>
             <Link href="/ai-coach">
-              <Button variant="link" className="p-0 text-primary font-bold flex items-center gap-1 h-auto hover:no-underline">
+              <Button variant="link" className="p-0 text-primary font-bold flex items-center gap-1 h-auto hover:no-underline" aria-label="Falar com o NutriAI Coach">
                 Falar com NutriAI <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </Link>
@@ -208,52 +218,65 @@ export default function DashboardPage() {
         </Card>
       </div>
 
-      <div>
-        <h2 className="text-2xl font-bold font-headline text-primary mb-6">Conexões de Saúde</h2>
+      <section aria-labelledby="health-connections-title">
+        <h2 id="health-connections-title" className="text-2xl font-bold font-headline text-primary mb-6">Conexões de Saúde</h2>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <Card className={`shadow-sm transition-all border-2 ${isXiaomiConnected ? 'border-green-500/20 bg-green-50/10' : 'border-muted/40'}`}>
-            <CardHeader>
+            <CardHeader className="pb-3">
               <div className="flex items-center justify-between">
-                <CardTitle className="text-lg font-bold flex items-center gap-2">
-                  <Activity className="h-5 w-5 text-orange-500" />
-                  Xiaomi Mi Fitness
-                </CardTitle>
-                {isXiaomiConnected && <CheckCircle2 className="h-5 w-5 text-green-500" />}
+                <div className="flex items-center gap-2">
+                  <div className="p-2 rounded-lg bg-orange-500/10">
+                    <Smartphone className="h-5 w-5 text-orange-500" aria-hidden="true" />
+                  </div>
+                  <CardTitle className="text-lg font-bold">Xiaomi Mi Fitness</CardTitle>
+                </div>
+                {isXiaomiConnected && (
+                  <CheckCircle2 className="h-5 w-5 text-green-500" aria-label="Ligado" />
+                )}
               </div>
+              <CardDescription className="mt-2 text-xs font-medium uppercase tracking-wider">
+                Via Google Fit Bridge
+              </CardDescription>
             </CardHeader>
             <CardContent>
               <p className="text-sm text-muted-foreground mb-6 leading-relaxed">
-                Importe automaticamente os seus passos, calorias gastas e dados de sono através da ponte com o Google Fit.
+                Sincronize automaticamente passos, sono e calorias através da ponte segura com o Google Fit.
               </p>
               
               {!isXiaomiConnected ? (
                 <Dialog>
                   <DialogTrigger asChild>
-                    <Button className="w-full gap-2 font-bold">
-                      Conectar Dispositivo
+                    <Button className="w-full gap-2 font-bold shadow-md hover:shadow-lg transition-shadow">
+                      <Plus className="h-4 w-4" /> Conectar Dispositivo
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="sm:max-w-[425px]">
                     <DialogHeader>
                       <DialogTitle>Ligar Xiaomi Mi Fitness</DialogTitle>
                       <DialogDescription>
-                        Para importar os teus dados da Xiaomi, utilizamos o Google Fit como ponte de sincronização segura.
+                        A NutriAI utiliza o Google Fit como ponte para ler os dados da sua Xiaomi Mi Band ou relógio.
                       </DialogDescription>
                     </DialogHeader>
                     <div className="py-6 space-y-4">
-                      <div className="p-4 rounded-xl bg-muted/30 border space-y-3">
-                        <div className="flex gap-3 items-start text-sm">
-                          <div className="h-5 w-5 rounded-full bg-primary text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5">1</div>
-                          <p>Na app <strong>Mi Fitness</strong>, vai a Perfil &gt; Apps ligadas e seleciona o <strong>Google Fit</strong>.</p>
+                      <div className="p-4 rounded-xl bg-muted/30 border space-y-4">
+                        <div className="flex gap-4 items-start">
+                          <div className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-xs shrink-0 font-bold">1</div>
+                          <div>
+                            <p className="font-bold text-sm">Configurar Mi Fitness</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">Na app Xiaomi, vá a Perfil &gt; Apps ligadas e ligue o Google Fit.</p>
+                          </div>
                         </div>
-                        <div className="flex gap-3 items-start text-sm">
-                          <div className="h-5 w-5 rounded-full bg-primary text-white flex items-center justify-center text-[10px] shrink-0 mt-0.5">2</div>
-                          <p>Clica no botão abaixo para autorizar a NutriAI a ler os dados do teu Google Fit.</p>
+                        <div className="flex gap-4 items-start">
+                          <div className="h-6 w-6 rounded-full bg-primary text-white flex items-center justify-center text-xs shrink-0 font-bold">2</div>
+                          <div>
+                            <p className="font-bold text-sm">Autorizar NutriAI</p>
+                            <p className="text-xs text-muted-foreground mt-0.5">Clique no botão abaixo para ligar a sua conta Google.</p>
+                          </div>
                         </div>
                       </div>
                       <div className="flex items-center gap-2 p-3 rounded-lg bg-blue-50 border border-blue-100 text-blue-700 text-xs">
                         <Info className="h-4 w-4 shrink-0" />
-                        <p>Isto garante que os teus passos e treinos apareçam automaticamente no teu diário.</p>
+                        <p>Isto garante que os seus passos apareçam automaticamente no diário.</p>
                       </div>
                     </div>
                     <DialogFooter>
@@ -261,31 +284,41 @@ export default function DashboardPage() {
                         onClick={handleConnectGoogleFit} 
                         disabled={isConnecting}
                         className="w-full gap-2 bg-[#4285F4] hover:bg-[#4285F4]/90 text-white font-bold"
+                        aria-label="Autorizar conexão via Google Fit"
                       >
                         {isConnecting ? (
                           <div className="h-4 w-4 animate-spin border-2 border-white border-t-transparent rounded-full" />
                         ) : (
                           <ExternalLink className="h-4 w-4" />
                         )}
-                        Autorizar via Google Fit
+                        Autorizar com Google
                       </Button>
                     </DialogFooter>
                   </DialogContent>
                 </Dialog>
               ) : (
-                <div className="flex flex-col gap-2">
-                  <div className="text-xs text-green-600 font-bold flex items-center gap-1.5 mb-2">
-                    <CheckCircle2 className="h-3.5 w-3.5" /> Ligado e a sincronizar
+                <div className="flex flex-col gap-3">
+                  <div className="p-3 rounded-lg bg-green-50 border border-green-100 flex items-center justify-between">
+                    <div className="flex items-center gap-2 text-xs text-green-700 font-bold">
+                      <CheckCircle2 className="h-4 w-4" /> Ativo e a Sincronizar
+                    </div>
+                    <span className="text-[10px] text-green-600 bg-green-100 px-1.5 py-0.5 rounded uppercase font-bold">Online</span>
                   </div>
-                  <Button variant="outline" size="sm" className="w-full text-xs" onClick={() => setIsXiaomiConnected(false)}>
-                    Desligar
+                  <Button 
+                    variant="outline" 
+                    size="sm" 
+                    className="w-full gap-2 text-destructive hover:bg-destructive/10 border-destructive/20"
+                    onClick={handleDisconnect}
+                    aria-label="Desligar Xiaomi Mi Fitness"
+                  >
+                    <Unlink className="h-3.5 w-3.5" /> Desligar Dispositivo
                   </Button>
                 </div>
               )}
             </CardContent>
           </Card>
         </div>
-      </div>
+      </section>
     </div>
   );
 }

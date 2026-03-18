@@ -22,7 +22,7 @@ export default function Home() {
       <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-4">
           <SidebarTrigger>
-            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Menu principal">
+            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Abrir menu lateral de navegação">
               <Menu className="h-6 w-6" />
             </Button>
           </SidebarTrigger>
@@ -43,7 +43,7 @@ export default function Home() {
               <div className="hidden sm:flex flex-col items-end">
                 <span className="text-xs font-bold text-primary">{user.email || 'Utilizador'}</span>
               </div>
-              <Link href="/profile" aria-label="Ver perfil">
+              <Link href="/profile" aria-label="Ver o meu perfil">
                 <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center border hover:border-primary transition-all">
                   <User className="h-4 w-4 text-primary" aria-hidden="true" />
                 </div>
@@ -51,7 +51,7 @@ export default function Home() {
             </div>
           ) : (
             <Link href="/login" className="ml-2">
-              <Button size="sm" className="gap-2">
+              <Button size="sm" className="gap-2" aria-label="Ir para a página de login">
                 Entrar
               </Button>
             </Link>
@@ -67,18 +67,18 @@ export default function Home() {
                   <h1 className="text-3xl font-bold tracking-tighter sm:text-5xl xl:text-6xl/none text-primary font-headline">
                     Transforme a sua Saúde com IA
                   </h1>
-                  <p className="max-w-[600px] text-muted-foreground md:text-xl">
+                  <p className="max-w-[600px] text-muted-foreground md:text-xl leading-relaxed">
                     NutriAI: O seu assistente pessoal de nutrição e fitness que aprende consigo. Planos personalizados, diário inteligente e análise especializada.
                   </p>
                 </div>
                 <div className="flex flex-col gap-2 min-[400px]:flex-row">
                   <Link href={user ? "/dashboard" : "/login"}>
-                    <Button size="lg" className="bg-primary hover:bg-primary/90">
+                    <Button size="lg" className="bg-primary hover:bg-primary/90 shadow-lg font-bold">
                       Começar Agora
                     </Button>
                   </Link>
                   <Link href="/profile">
-                    <Button size="lg" variant="outline">
+                    <Button size="lg" variant="outline" className="font-bold">
                       Definir Metas
                     </Button>
                   </Link>
@@ -111,7 +111,7 @@ export default function Home() {
               </div>
             </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mt-12">
-              <Card className="border-none shadow-md bg-white">
+              <Card className="border-none shadow-md bg-white hover:shadow-lg transition-shadow">
                 <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="p-3 rounded-full bg-primary/10">
                     <Apple className="h-8 w-8 text-primary" aria-hidden="true" />
@@ -120,7 +120,7 @@ export default function Home() {
                   <p className="text-muted-foreground">Registo fácil de refeições com scanner de código de barras e base de dados integrada.</p>
                 </CardContent>
               </Card>
-              <Card className="border-none shadow-md bg-white">
+              <Card className="border-none shadow-md bg-white hover:shadow-lg transition-shadow">
                 <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="p-3 rounded-full bg-accent/20">
                     <BrainCircuit className="h-8 w-8 text-accent-foreground" aria-hidden="true" />
@@ -129,7 +129,7 @@ export default function Home() {
                   <p className="text-muted-foreground">Feedback em tempo real, sugestões de refeições e ajustes dinâmicos de metas.</p>
                 </CardContent>
               </Card>
-              <Card className="border-none shadow-md bg-white">
+              <Card className="border-none shadow-md bg-white hover:shadow-lg transition-shadow">
                 <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="p-3 rounded-full bg-primary/10">
                     <Activity className="h-8 w-8 text-primary" aria-hidden="true" />
@@ -144,7 +144,7 @@ export default function Home() {
       </main>
       <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-white">
         <p className="text-xs text-muted-foreground">© 2024 NutriAI. Todos os direitos reservados.</p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
+        <nav className="sm:ml-auto flex gap-4 sm:gap-6" aria-label="Links úteis">
           <Link className="text-xs hover:underline underline-offset-4" href="#">
             Privacidade
           </Link>

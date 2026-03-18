@@ -61,9 +61,9 @@ export default function DiaryPage() {
         <div className="flex gap-2">
           <div className="relative">
             <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
-            <Input className="pl-9 w-[200px] md:w-[300px]" placeholder="Pesquisar alimento..." aria-label="Pesquisar alimento" />
+            <Input className="pl-9 w-[200px] md:w-[300px]" placeholder="Pesquisar alimento..." aria-label="Pesquisar alimento para registar" />
           </div>
-          <Button variant="outline" className="gap-2">
+          <Button variant="outline" className="gap-2" aria-label="Abrir scanner de código de barras">
             <ScanLine className="h-4 w-4" aria-hidden="true" /> Scanner
           </Button>
         </div>
@@ -113,7 +113,7 @@ export default function DiaryPage() {
           </CardContent>
         </Card>
 
-        <div className="space-y-6">
+        <aside className="space-y-6">
           <Card>
             <CardHeader>
               <CardTitle className="text-lg">Resumo Nutricional</CardTitle>
@@ -121,35 +121,35 @@ export default function DiaryPage() {
             <CardContent className="space-y-4">
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span>Energia</span>
+                  <span className="text-muted-foreground">Energia</span>
                   <span className="font-bold">785 / 2100 kcal</span>
                 </div>
-                <Progress value={37} className="h-2" aria-label="Resumo de calorias totais do dia" />
+                <Progress value={37} className="h-2" aria-label="Resumo de calorias: 37% consumido" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span>Proteína</span>
+                  <span className="text-muted-foreground">Proteína</span>
                   <span className="font-bold">69 / 150g</span>
                 </div>
-                <Progress value={46} className="h-2" aria-label="Resumo de ingestão de proteína total" />
+                <Progress value={46} className="h-2" aria-label="Resumo de proteína: 46% da meta" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span>Carbs</span>
+                  <span className="text-muted-foreground">Carbs</span>
                   <span className="font-bold">68 / 220g</span>
                 </div>
-                <Progress value={31} className="h-2" aria-label="Resumo de ingestão de hidratos de carbono total" />
+                <Progress value={31} className="h-2" aria-label="Resumo de hidratos de carbono: 31% da meta" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
-                  <span>Gordura</span>
+                  <span className="text-muted-foreground">Gordura</span>
                   <span className="font-bold">23 / 70g</span>
                 </div>
-                <Progress value={33} className="h-2" aria-label="Resumo de ingestão de gordura total" />
+                <Progress value={33} className="h-2" aria-label="Resumo de gordura: 33% da meta" />
               </div>
             </CardContent>
           </Card>
-        </div>
+        </aside>
       </div>
     </div>
   );
