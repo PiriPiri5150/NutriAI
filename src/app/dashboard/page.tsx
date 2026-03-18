@@ -45,17 +45,17 @@ export default function DashboardPage() {
             <Progress value={41} className="h-3" aria-label="Progresso de calorias totais do dia" />
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
-                <h3 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Proteína</h3>
+                <h2 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Proteína</h2>
                 <div className="font-semibold">82g / 150g</div>
                 <Progress value={54} className="h-1 mt-1" aria-label="Progresso de ingestão de proteína" />
               </div>
               <div className="text-center">
-                <h3 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Carbs</h3>
+                <h2 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Carbs</h2>
                 <div className="font-semibold">120g / 220g</div>
                 <Progress value={54} className="h-1 mt-1" aria-label="Progresso de ingestão de hidratos de carbono" />
               </div>
               <div className="text-center">
-                <h3 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Gordura</h3>
+                <h2 className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Gordura</h2>
                 <div className="font-semibold">35g / 70g</div>
                 <Progress value={50} className="h-1 mt-1" aria-label="Progresso de ingestão de gordura" />
               </div>
