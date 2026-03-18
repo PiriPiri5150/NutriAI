@@ -395,7 +395,7 @@ export default function OncologyPage() {
                     )}
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <h2 className="font-bold text-sm mb-4 uppercase tracking-wider text-muted-foreground">Alimentos Recomendados</h2>
+                    <h4 className="font-bold text-sm mb-4 uppercase tracking-wider text-muted-foreground">Alimentos Recomendados</h4>
                     <div className="space-y-4">
                       {recommendedFoods?.length === 0 ? (
                         <p className="text-center py-8 text-sm text-muted-foreground">Nenhum alimento recomendado para este plano.</p>
