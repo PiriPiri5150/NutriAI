@@ -1,11 +1,13 @@
+
 'use client';
 
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Activity, Apple, BrainCircuit, ShieldCheck, LogOut, User } from 'lucide-react';
+import { Activity, Apple, BrainCircuit, ShieldCheck, LogOut, User, Menu } from 'lucide-react';
 import { useUser, useAuth } from '@/firebase';
 import { signOut } from 'firebase/auth';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function Home() {
   const { user } = useUser();
@@ -18,31 +20,34 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
-        <Link className="flex items-center justify-center" href="/">
-          <BrainCircuit className="h-6 w-6 text-primary" />
-          <span className="ml-2 text-xl font-bold font-headline text-primary">NutriAI</span>
-        </Link>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger>
+            <Button variant="ghost" size="icon" className="md:hidden">
+              <Menu className="h-6 w-6" />
+            </Button>
+          </SidebarTrigger>
+          <Link className="flex items-center justify-center" href="/">
+            <BrainCircuit className="h-6 w-6 text-primary" />
+            <span className="ml-2 text-xl font-bold font-headline text-primary">NutriAI</span>
+          </Link>
+        </div>
         <nav className="ml-auto flex items-center gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/dashboard">
+          <Link className="hidden sm:inline-block text-sm font-medium hover:underline underline-offset-4" href="/dashboard">
             Painel
           </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/diary">
+          <Link className="hidden sm:inline-block text-sm font-medium hover:underline underline-offset-4" href="/diary">
             Diário
-          </Link>
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/oncology">
-            Oncologia
           </Link>
           {user ? (
             <div className="flex items-center gap-3 ml-2 pl-4 border-l">
               <div className="hidden sm:flex flex-col items-end">
                 <span className="text-xs font-bold text-primary">{user.email || 'Utilizador'}</span>
-                <button onClick={handleLogout} className="text-[10px] text-destructive hover:underline flex items-center gap-1">
-                  <LogOut className="h-3 w-3" /> Sair
-                </button>
               </div>
-              <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center">
-                <User className="h-4 w-4 text-primary" />
-              </div>
+              <Link href="/profile">
+                <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center border hover:border-primary transition-all">
+                  <User className="h-4 w-4 text-primary" />
+                </div>
+              </Link>
             </div>
           ) : (
             <Link href="/login" className="ml-2">

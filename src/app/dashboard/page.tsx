@@ -1,16 +1,23 @@
+
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Progress } from '@/components/ui/progress';
 import { Button } from '@/components/ui/button';
 import { Apple, Activity, Flame, Trophy, Plus, ChevronRight, BrainCircuit } from 'lucide-react';
 import Link from 'next/link';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 export default function DashboardPage() {
   return (
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
       <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold font-headline text-primary">Bom dia, Utilizador!</h1>
-          <p className="text-muted-foreground">Aqui está o seu resumo de hoje.</p>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
+          <div>
+            <h1 className="text-3xl font-bold font-headline text-primary">Bom dia, Utilizador!</h1>
+            <p className="text-muted-foreground">Aqui está o seu resumo de hoje.</p>
+          </div>
         </div>
         <Link href="/diary">
           <Button className="bg-primary hover:bg-primary/90 gap-2">

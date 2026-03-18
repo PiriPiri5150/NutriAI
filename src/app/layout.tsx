@@ -1,7 +1,10 @@
+
 import type {Metadata} from 'next';
 import './globals.css';
 import { FirebaseClientProvider } from '@/firebase/client-provider';
 import { Toaster } from '@/components/ui/toaster';
+import { SidebarProvider } from '@/components/ui/sidebar';
+import { AppSidebar } from '@/components/app-sidebar';
 
 export const metadata: Metadata = {
   title: 'NutriAI - Assistente de Nutrição e Fitness',
@@ -22,7 +25,12 @@ export default function RootLayout({
       </head>
       <body className="font-body bg-background text-foreground antialiased">
         <FirebaseClientProvider>
-          {children}
+          <SidebarProvider>
+            <AppSidebar />
+            <main className="flex-1 overflow-auto">
+              {children}
+            </main>
+          </SidebarProvider>
           <Toaster />
         </FirebaseClientProvider>
       </body>

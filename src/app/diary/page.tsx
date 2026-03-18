@@ -1,8 +1,12 @@
+
+'use client';
+
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Apple, Plus, Search, ScanLine, Coffee, Utensils, Moon, Carrot } from 'lucide-react';
 import { Progress } from '@/components/ui/progress';
+import { SidebarTrigger } from '@/components/ui/sidebar';
 
 const meals = [
   { 
@@ -48,9 +52,12 @@ export default function DiaryPage() {
   return (
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-8 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <h1 className="text-3xl font-bold font-headline text-primary">Diário Alimentar</h1>
-          <p className="text-muted-foreground">Sexta-feira, 24 de Maio</p>
+        <div className="flex items-center gap-4">
+          <SidebarTrigger />
+          <div>
+            <h1 className="text-3xl font-bold font-headline text-primary">Diário Alimentar</h1>
+            <p className="text-muted-foreground">Sexta-feira, 24 de Maio</p>
+          </div>
         </div>
         <div className="flex gap-2">
           <div className="relative">
