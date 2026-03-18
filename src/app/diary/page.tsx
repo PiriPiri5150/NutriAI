@@ -53,7 +53,7 @@ export default function DiaryPage() {
     <div className="p-4 md:p-8 max-w-5xl mx-auto space-y-8 pb-20">
       <div className="flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div className="flex items-center gap-4">
-          <SidebarTrigger />
+          <SidebarTrigger aria-label="Abrir menu lateral" />
           <div>
             <h1 className="text-3xl font-bold font-headline text-primary">Diário Alimentar</h1>
             <p className="text-muted-foreground">Sexta-feira, 24 de Maio</p>
@@ -61,11 +61,11 @@ export default function DiaryPage() {
         </div>
         <div className="flex gap-2">
           <div className="relative">
-            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" />
-            <Input className="pl-9 w-[200px] md:w-[300px]" placeholder="Pesquisar alimento..." />
+            <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-muted-foreground" aria-hidden="true" />
+            <Input className="pl-9 w-[200px] md:w-[300px]" placeholder="Pesquisar alimento..." aria-label="Pesquisar alimento" />
           </div>
           <Button variant="outline" className="gap-2">
-            <ScanLine className="h-4 w-4" /> Scanner
+            <ScanLine className="h-4 w-4" aria-hidden="true" /> Scanner
           </Button>
         </div>
       </div>
@@ -81,14 +81,14 @@ export default function DiaryPage() {
                 <div className="flex items-center justify-between mb-3">
                   <div className="flex items-center gap-3">
                     <div className="p-2 rounded-lg bg-primary/10 text-primary">
-                      <meal.icon className="h-5 w-5" />
+                      <meal.icon className="h-5 w-5" aria-hidden="true" />
                     </div>
-                    <h3 className="font-bold text-lg">{meal.name}</h3>
+                    <h2 className="font-bold text-lg">{meal.name}</h2>
                   </div>
                   <div className="flex items-center gap-4">
                     <span className="text-sm font-semibold">{meal.totalKcal} kcal</span>
-                    <Button variant="ghost" size="icon" className="h-8 w-8 text-primary">
-                      <Plus className="h-5 w-5" />
+                    <Button variant="ghost" size="icon" className="h-8 w-8 text-primary" aria-label={`Adicionar item ao ${meal.name}`}>
+                      <Plus className="h-5 w-5" aria-hidden="true" />
                     </Button>
                   </div>
                 </div>
@@ -125,28 +125,28 @@ export default function DiaryPage() {
                   <span>Energia</span>
                   <span className="font-bold">785 / 2100 kcal</span>
                 </div>
-                <Progress value={37} className="h-2" />
+                <Progress value={37} className="h-2" aria-label="Resumo de calorias totais" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Proteína</span>
                   <span className="font-bold">69 / 150g</span>
                 </div>
-                <Progress value={46} className="h-2" />
+                <Progress value={46} className="h-2" aria-label="Resumo de proteína total" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Carbs</span>
                   <span className="font-bold">68 / 220g</span>
                 </div>
-                <Progress value={31} className="h-2" />
+                <Progress value={31} className="h-2" aria-label="Resumo de hidratos de carbono totais" />
               </div>
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span>Gordura</span>
                   <span className="font-bold">23 / 70g</span>
                 </div>
-                <Progress value={33} className="h-2" />
+                <Progress value={33} className="h-2" aria-label="Resumo de gorduras totais" />
               </div>
             </CardContent>
           </Card>

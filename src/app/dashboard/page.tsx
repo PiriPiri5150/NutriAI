@@ -13,7 +13,7 @@ export default function DashboardPage() {
     <div className="p-4 md:p-8 max-w-7xl mx-auto space-y-8">
       <div className="flex justify-between items-center">
         <div className="flex items-center gap-4">
-          <SidebarTrigger />
+          <SidebarTrigger aria-label="Abrir menu lateral" />
           <div>
             <h1 className="text-3xl font-bold font-headline text-primary">Bom dia, Utilizador!</h1>
             <p className="text-muted-foreground">Aqui está o seu resumo de hoje.</p>
@@ -21,7 +21,7 @@ export default function DashboardPage() {
         </div>
         <Link href="/diary">
           <Button className="bg-primary hover:bg-primary/90 gap-2">
-            <Plus className="h-4 w-4" /> Adicionar Refeição
+            <Plus className="h-4 w-4" aria-hidden="true" /> Adicionar Refeição
           </Button>
         </Link>
       </div>
@@ -30,7 +30,7 @@ export default function DashboardPage() {
         <Card className="md:col-span-2">
           <CardHeader>
             <CardTitle className="text-lg font-medium flex items-center gap-2">
-              <Flame className="h-5 w-5 text-orange-500" /> Calorias Restantes
+              <Flame className="h-5 w-5 text-orange-500" aria-hidden="true" /> Calorias Restantes
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-6">
@@ -43,22 +43,22 @@ export default function DashboardPage() {
                 Meta: 2,100 kcal
               </div>
             </div>
-            <Progress value={41} className="h-3" />
+            <Progress value={41} className="h-3" aria-label="Progresso de calorias diárias" />
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
                 <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Proteína</div>
                 <div className="font-semibold">82g / 150g</div>
-                <Progress value={54} className="h-1 mt-1" />
+                <Progress value={54} className="h-1 mt-1" aria-label="Progresso de proteína" />
               </div>
               <div className="text-center">
                 <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Carbs</div>
                 <div className="font-semibold">120g / 220g</div>
-                <Progress value={54} className="h-1 mt-1" />
+                <Progress value={54} className="h-1 mt-1" aria-label="Progresso de hidratos de carbono" />
               </div>
               <div className="text-center">
                 <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Gordura</div>
                 <div className="font-semibold">35g / 70g</div>
-                <Progress value={50} className="h-1 mt-1" />
+                <Progress value={50} className="h-1 mt-1" aria-label="Progresso de gorduras" />
               </div>
             </div>
           </CardContent>
@@ -67,7 +67,7 @@ export default function DashboardPage() {
         <Card className="bg-accent/10 border-accent/20">
           <CardHeader>
             <CardTitle className="text-lg font-medium flex items-center gap-2">
-              <BrainCircuit className="h-5 w-5 text-accent-foreground" /> Insight da IA
+              <BrainCircuit className="h-5 w-5 text-accent-foreground" aria-hidden="true" /> Insight da IA
             </CardTitle>
           </CardHeader>
           <CardContent className="space-y-4">
@@ -76,7 +76,7 @@ export default function DashboardPage() {
             </p>
             <Link href="/ai-coach">
               <Button variant="link" className="p-0 text-primary flex items-center gap-1 h-auto">
-                Falar com NutriAI <ChevronRight className="h-4 w-4" />
+                Falar com NutriAI <ChevronRight className="h-4 w-4" aria-hidden="true" />
               </Button>
             </Link>
           </CardContent>
@@ -85,7 +85,7 @@ export default function DashboardPage() {
         <Card>
           <CardHeader>
             <CardTitle className="text-lg font-medium flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-yellow-500" /> Streak Atual
+              <Trophy className="h-5 w-5 text-yellow-500" aria-hidden="true" /> Streak Atual
             </CardTitle>
           </CardHeader>
           <CardContent className="text-center py-4">
@@ -112,11 +112,11 @@ export default function DashboardPage() {
                 <div key={i} className="flex items-center justify-between p-3 rounded-lg hover:bg-muted/50 transition-colors">
                   <div className="flex items-center gap-3">
                     <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center">
-                      <Apple className="h-5 w-5 text-primary" />
+                      <Apple className="h-5 w-5 text-primary" aria-hidden="true" />
                     </div>
                     <div>
-                      <div className="font-semibold">{meal.name}</div>
-                      <div className="text-sm text-muted-foreground">{meal.desc}</div>
+                      <h2 className="font-semibold text-base">{meal.name}</h2>
+                      <p className="text-sm text-muted-foreground">{meal.desc}</p>
                     </div>
                   </div>
                   <div className="text-right">
@@ -136,10 +136,10 @@ export default function DashboardPage() {
           <CardContent className="space-y-4">
             <div className="flex gap-4 p-4 rounded-xl border bg-white shadow-sm">
               <div className="h-12 w-12 rounded-full bg-accent/20 flex items-center justify-center shrink-0">
-                <Activity className="h-6 w-6 text-accent-foreground" />
+                <Activity className="h-6 w-6 text-accent-foreground" aria-hidden="true" />
               </div>
               <div>
-                <h4 className="font-bold">Análise de Performance</h4>
+                <h2 className="font-bold text-lg">Análise de Performance</h2>
                 <p className="text-sm text-muted-foreground">
                   Acompanhe métricas de VO2 max e carga de treino adaptada.
                 </p>

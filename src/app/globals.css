@@ -1,3 +1,4 @@
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -15,7 +16,7 @@
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222 47% 11%;
     --muted: 210 40% 96.1%;
-    --muted-foreground: 215 16% 47%;
+    --muted-foreground: 215 25% 35%; /* Escurecido para melhor contraste (Acessibilidade) */
     --accent: 188 85% 56%; /* #2FD4ED - NutriAI Accent Cyan */
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
