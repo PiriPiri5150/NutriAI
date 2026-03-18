@@ -1,4 +1,3 @@
-
 'use client';
 
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -43,22 +42,22 @@ export default function DashboardPage() {
                 Meta: 2,100 kcal
               </div>
             </div>
-            <Progress value={41} className="h-3" aria-label="Progresso de calorias diárias" />
+            <Progress value={41} className="h-3" aria-label="Progresso de calorias totais do dia" />
             <div className="grid grid-cols-3 gap-4 pt-4 border-t">
               <div className="text-center">
                 <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Proteína</div>
                 <div className="font-semibold">82g / 150g</div>
-                <Progress value={54} className="h-1 mt-1" aria-label="Progresso de proteína" />
+                <Progress value={54} className="h-1 mt-1" aria-label="Progresso de ingestão de proteína" />
               </div>
               <div className="text-center">
                 <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Carbs</div>
                 <div className="font-semibold">120g / 220g</div>
-                <Progress value={54} className="h-1 mt-1" aria-label="Progresso de hidratos de carbono" />
+                <Progress value={54} className="h-1 mt-1" aria-label="Progresso de ingestão de hidratos de carbono" />
               </div>
               <div className="text-center">
                 <div className="text-xs text-muted-foreground uppercase font-bold tracking-wider">Gordura</div>
                 <div className="font-semibold">35g / 70g</div>
-                <Progress value={50} className="h-1 mt-1" aria-label="Progresso de gorduras" />
+                <Progress value={50} className="h-1 mt-1" aria-label="Progresso de ingestão de gordura" />
               </div>
             </div>
           </CardContent>
@@ -115,7 +114,7 @@ export default function DashboardPage() {
                       <Apple className="h-5 w-5 text-primary" aria-hidden="true" />
                     </div>
                     <div>
-                      <h2 className="font-semibold text-base">{meal.name}</h2>
+                      <h3 className="font-semibold text-base">{meal.name}</h3>
                       <p className="text-sm text-muted-foreground">{meal.desc}</p>
                     </div>
                   </div>
@@ -139,7 +138,7 @@ export default function DashboardPage() {
                 <Activity className="h-6 w-6 text-accent-foreground" aria-hidden="true" />
               </div>
               <div>
-                <h2 className="font-bold text-lg">Análise de Performance</h2>
+                <h3 className="font-bold text-lg">Análise de Performance</h3>
                 <p className="text-sm text-muted-foreground">
                   Acompanhe métricas de VO2 max e carga de treino adaptada.
                 </p>

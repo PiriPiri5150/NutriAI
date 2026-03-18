@@ -136,7 +136,7 @@ export default function OncologyPage() {
       </div>
 
       <Alert className="bg-blue-50 border-blue-200">
-        <Info className="h-4 w-4 text-blue-500" />
+        <Info className="h-4 w-4 text-blue-500" aria-hidden="true" />
         <AlertTitle className="text-blue-700">Protocolo Clínico</AlertTitle>
         <AlertDescription className="text-blue-600">
           As recomendações nutricionais e de exercício são adaptadas à sua fase de tratamento. Consulte sempre a sua equipa médica.
@@ -146,10 +146,10 @@ export default function OncologyPage() {
       <Tabs defaultValue="physiology" className="w-full">
         <TabsList className="grid w-full grid-cols-2 max-w-md mb-8">
           <TabsTrigger value="physiology" className="flex gap-2">
-            <Activity className="h-4 w-4" /> Fisiologia
+            <Activity className="h-4 w-4" aria-hidden="true" /> Fisiologia
           </TabsTrigger>
           <TabsTrigger value="nutrition" className="flex gap-2">
-            <Apple className="h-4 w-4" /> Nutrição
+            <Apple className="h-4 w-4" aria-hidden="true" /> Nutrição
           </TabsTrigger>
         </TabsList>
 
@@ -163,20 +163,20 @@ export default function OncologyPage() {
               <CardContent className="space-y-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="p-4 rounded-lg border bg-muted/30">
-                    <div className="text-sm font-medium text-muted-foreground uppercase">VO2 Max Estimado</div>
+                    <h2 className="text-sm font-medium text-muted-foreground uppercase">VO2 Max Estimado</h2>
                     <div className="text-2xl font-bold mt-1">32.4 ml/kg/min</div>
                     <div className="text-xs text-green-600 font-semibold mt-1">+2.1 vs mês anterior</div>
                   </div>
                   <div className="p-4 rounded-lg border bg-muted/30">
-                    <div className="text-sm font-medium text-muted-foreground uppercase">Carga de Treino</div>
+                    <h2 className="text-sm font-medium text-muted-foreground uppercase">Carga de Treino</h2>
                     <div className="text-2xl font-bold mt-1">Moderada (RPE 4-6)</div>
                   </div>
                   <div className="p-4 rounded-lg border bg-muted/30">
-                    <div className="text-sm font-medium text-muted-foreground uppercase">FC Alvo</div>
+                    <h2 className="text-sm font-medium text-muted-foreground uppercase">FC Alvo</h2>
                     <div className="text-2xl font-bold mt-1">112 - 134 bpm</div>
                   </div>
                   <div className="p-4 rounded-lg border bg-muted/30">
-                    <div className="text-sm font-medium text-muted-foreground uppercase">Status</div>
+                    <h2 className="text-sm font-medium text-muted-foreground uppercase">Status</h2>
                     <div className="text-2xl font-bold mt-1">Estável</div>
                   </div>
                 </div>
@@ -186,21 +186,21 @@ export default function OncologyPage() {
             <Card>
               <CardHeader>
                 <CardTitle className="flex items-center gap-2">
-                  <ShieldCheck className="h-5 w-5 text-primary" /> Prescrição Segura
+                  <ShieldCheck className="h-5 w-5 text-primary" aria-hidden="true" /> Prescrição Segura
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 <ul className="space-y-4 text-sm">
                   <li className="flex gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" aria-hidden="true" />
                     <span>Treino aeróbico de baixo impacto 3x/semana.</span>
                   </li>
                   <li className="flex gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" aria-hidden="true" />
                     <span>Monitorizar fadiga extrema pós-sessão.</span>
                   </li>
                   <li className="flex gap-2">
-                    <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" />
+                    <div className="h-1.5 w-1.5 rounded-full bg-primary mt-1.5 shrink-0" aria-hidden="true" />
                     <span>Sessões de no máximo 40 minutos.</span>
                   </li>
                 </ul>
@@ -217,7 +217,7 @@ export default function OncologyPage() {
                 <Dialog>
                   <DialogTrigger asChild>
                     <Button size="sm" className="h-8 gap-1">
-                      <Plus className="h-4 w-4" /> Novo
+                      <Plus className="h-4 w-4" aria-hidden="true" /> Novo
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-md">
@@ -230,36 +230,36 @@ export default function OncologyPage() {
                     <form onSubmit={handleAddPlan}>
                       <div className="grid gap-4 py-4">
                         <div className="space-y-2">
-                          <Label>Nome do Plano</Label>
-                          <Input name="planName" placeholder="Ex: Dieta Recuperação Ativa" required />
+                          <Label htmlFor="planName">Nome do Plano</Label>
+                          <Input id="planName" name="planName" placeholder="Ex: Dieta Recuperação Ativa" required />
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
-                            <Label>Início</Label>
-                            <Input name="startDate" type="date" required />
+                            <Label htmlFor="startDate">Início</Label>
+                            <Input id="startDate" name="startDate" type="date" required />
                           </div>
                           <div className="space-y-2">
-                            <Label>Fim</Label>
-                            <Input name="endDate" type="date" required />
+                            <Label htmlFor="endDate">Fim</Label>
+                            <Input id="endDate" name="endDate" type="date" required />
                           </div>
                         </div>
                         <div className="grid grid-cols-2 gap-4">
                           <div className="space-y-2">
-                            <Label>Calorias (kcal)</Label>
-                            <Input name="targetCalories" type="number" required />
+                            <Label htmlFor="targetCalories">Calorias (kcal)</Label>
+                            <Input id="targetCalories" name="targetCalories" type="number" required />
                           </div>
                           <div className="space-y-2">
-                            <Label>Proteína (g)</Label>
-                            <Input name="targetProteinGrams" type="number" required />
+                            <Label htmlFor="targetProteinGrams">Proteína (g)</Label>
+                            <Input id="targetProteinGrams" name="targetProteinGrams" type="number" required />
                           </div>
                         </div>
                         <div className="space-y-2">
-                          <Label>Descrição / Objetivos</Label>
-                          <Textarea name="description" placeholder="Descreva o propósito deste plano..." />
+                          <Label htmlFor="description">Descrição / Objetivos</Label>
+                          <Textarea id="description" name="description" placeholder="Descreva o propósito deste plano..." />
                         </div>
                         <div className="space-y-2">
-                          <Label>Considerações Especiais</Label>
-                          <Input name="specialDietaryConsiderations" placeholder="Ex: Baixo resíduo, sem lactose..." />
+                          <Label htmlFor="specialDietaryConsiderations">Considerações Especiais</Label>
+                          <Input id="specialDietaryConsiderations" name="specialDietaryConsiderations" placeholder="Ex: Baixo resíduo, sem lactose..." />
                         </div>
                       </div>
                       <DialogFooter>
@@ -274,7 +274,7 @@ export default function OncologyPage() {
                   <div className="flex justify-center p-4">A carregar planos...</div>
                 ) : plans?.length === 0 ? (
                   <div className="text-center py-8 text-muted-foreground">
-                    <Utensils className="h-10 w-10 mx-auto mb-2 opacity-20" />
+                    <Utensils className="h-10 w-10 mx-auto mb-2 opacity-20" aria-hidden="true" />
                     <p>Nenhum plano criado.</p>
                   </div>
                 ) : (
@@ -286,6 +286,9 @@ export default function OncologyPage() {
                         className={`group relative flex flex-col p-3 rounded-lg border cursor-pointer transition-all ${
                           selectedPlanId === plan.id ? 'bg-primary/5 border-primary shadow-sm' : 'hover:bg-muted'
                         }`}
+                        role="button"
+                        tabIndex={0}
+                        aria-selected={selectedPlanId === plan.id}
                       >
                         <div className="flex items-center justify-between mb-1">
                           <span className="font-bold text-sm truncate pr-6">{plan.planName}</span>
@@ -297,12 +300,13 @@ export default function OncologyPage() {
                               e.stopPropagation();
                               handleDeletePlan(plan.id);
                             }}
+                            aria-label={`Eliminar plano ${plan.planName}`}
                           >
                             <Trash2 className="h-3 w-3" />
                           </Button>
                         </div>
                         <div className="flex items-center gap-2 text-xs text-muted-foreground">
-                          <CalendarIcon className="h-3 w-3" />
+                          <CalendarIcon className="h-3 w-3" aria-hidden="true" />
                           <span>{plan.startDate} - {plan.endDate}</span>
                         </div>
                       </div>
@@ -326,7 +330,7 @@ export default function OncologyPage() {
                       <Dialog>
                         <DialogTrigger asChild>
                           <Button size="sm" className="bg-accent text-accent-foreground hover:bg-accent/80 gap-2">
-                            <Plus className="h-4 w-4" /> Add Alimento
+                            <Plus className="h-4 w-4" aria-hidden="true" /> Add Alimento
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
@@ -339,26 +343,26 @@ export default function OncologyPage() {
                           <form onSubmit={handleAddFood}>
                             <div className="grid gap-4 py-4">
                               <div className="space-y-2">
-                                <Label>Alimento ou Categoria</Label>
-                                <Input name="category" placeholder="Ex: Frango cozido, Legumes vapor..." required />
+                                <Label htmlFor="category">Alimento ou Categoria</Label>
+                                <Input id="category" name="category" placeholder="Ex: Frango cozido, Legumes vapor..." required />
                               </div>
                               <div className="grid grid-cols-2 gap-4">
                                 <div className="space-y-2">
-                                  <Label>Quantidade</Label>
-                                  <Input name="quantity" type="number" required />
+                                  <Label htmlFor="quantity">Quantidade</Label>
+                                  <Input id="quantity" name="quantity" type="number" required />
                                 </div>
                                 <div className="space-y-2">
-                                  <Label>Unidade</Label>
-                                  <Input name="unit" placeholder="g, ml, un..." required />
+                                  <Label htmlFor="unit">Unidade</Label>
+                                  <Input id="unit" name="unit" placeholder="g, ml, un..." required />
                                 </div>
                               </div>
                               <div className="space-y-2">
-                                <Label>Refeição Sugerida</Label>
-                                <Input name="mealType" placeholder="Ex: Almoço, Pequeno-almoço..." required />
+                                <Label htmlFor="mealType">Refeição Sugerida</Label>
+                                <Input id="mealType" name="mealType" placeholder="Ex: Almoço, Pequeno-almoço..." required />
                               </div>
                               <div className="space-y-2">
-                                <Label>Notas de Preparação</Label>
-                                <Textarea name="notes" placeholder="Dicas para facilitar a ingestão..." />
+                                <Label htmlFor="notes">Notas de Preparação</Label>
+                                <Textarea id="notes" name="notes" placeholder="Dicas para facilitar a ingestão..." />
                               </div>
                             </div>
                             <DialogFooter>
@@ -391,7 +395,7 @@ export default function OncologyPage() {
                     )}
                   </CardHeader>
                   <CardContent className="pt-6">
-                    <h4 className="font-bold text-sm mb-4 uppercase tracking-wider text-muted-foreground">Alimentos Recomendados</h4>
+                    <h2 className="font-bold text-sm mb-4 uppercase tracking-wider text-muted-foreground">Alimentos Recomendados</h2>
                     <div className="space-y-4">
                       {recommendedFoods?.length === 0 ? (
                         <p className="text-center py-8 text-sm text-muted-foreground">Nenhum alimento recomendado para este plano.</p>
@@ -400,10 +404,10 @@ export default function OncologyPage() {
                           <div key={food.id} className="flex items-center justify-between p-4 rounded-xl border bg-white shadow-sm hover:shadow-md transition-shadow">
                             <div className="flex gap-4 items-center">
                               <div className="h-10 w-10 rounded-full bg-accent/10 flex items-center justify-center shrink-0">
-                                <Utensils className="h-5 w-5 text-accent-foreground" />
+                                <Utensils className="h-5 w-5 text-accent-foreground" aria-hidden="true" />
                               </div>
                               <div>
-                                <h5 className="font-bold text-base">{food.generalFoodCategory}</h5>
+                                <h3 className="font-bold text-base">{food.generalFoodCategory}</h3>
                                 <div className="flex gap-2 text-xs text-muted-foreground items-center">
                                   <span className="bg-primary/5 px-2 py-0.5 rounded text-primary font-medium">{food.mealTypeSuggestion}</span>
                                   <span>•</span>
@@ -419,6 +423,7 @@ export default function OncologyPage() {
                               size="icon"
                               className="text-muted-foreground hover:text-destructive"
                               onClick={() => handleDeleteFood(food.id)}
+                              aria-label={`Remover alimento ${food.generalFoodCategory}`}
                             >
                               <Trash2 className="h-4 w-4" />
                             </Button>
@@ -430,7 +435,7 @@ export default function OncologyPage() {
                 </>
               ) : (
                 <div className="h-full flex flex-col items-center justify-center p-12 text-center text-muted-foreground">
-                  <Apple className="h-12 w-12 mb-4 opacity-10" />
+                  <Apple className="h-12 w-12 mb-4 opacity-10" aria-hidden="true" />
                   <p className="text-lg">Selecione um plano à esquerda para gerir os detalhes nutricionais.</p>
                 </div>
               )}

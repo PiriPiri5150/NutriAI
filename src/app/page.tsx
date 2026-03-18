@@ -1,4 +1,3 @@
-
 'use client';
 
 import Link from 'next/link';
@@ -28,7 +27,7 @@ export default function Home() {
             </Button>
           </SidebarTrigger>
           <Link className="flex items-center justify-center" href="/">
-            <BrainCircuit className="h-6 w-6 text-primary" />
+            <BrainCircuit className="h-6 w-6 text-primary" aria-hidden="true" />
             <span className="ml-2 text-xl font-bold font-headline text-primary">NutriAI</span>
           </Link>
         </div>
@@ -46,7 +45,7 @@ export default function Home() {
               </div>
               <Link href="/profile" aria-label="Ver perfil">
                 <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center border hover:border-primary transition-all">
-                  <User className="h-4 w-4 text-primary" />
+                  <User className="h-4 w-4 text-primary" aria-hidden="true" />
                 </div>
               </Link>
             </div>
@@ -115,7 +114,7 @@ export default function Home() {
               <Card className="border-none shadow-md bg-white">
                 <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="p-3 rounded-full bg-primary/10">
-                    <Apple className="h-8 w-8 text-primary" />
+                    <Apple className="h-8 w-8 text-primary" aria-hidden="true" />
                   </div>
                   <h3 className="text-xl font-bold">Diário Inteligente</h3>
                   <p className="text-muted-foreground">Registo fácil de refeições com scanner de código de barras e base de dados integrada.</p>
@@ -124,7 +123,7 @@ export default function Home() {
               <Card className="border-none shadow-md bg-white">
                 <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="p-3 rounded-full bg-accent/20">
-                    <BrainCircuit className="h-8 w-8 text-accent-foreground" />
+                    <BrainCircuit className="h-8 w-8 text-accent-foreground" aria-hidden="true" />
                   </div>
                   <h3 className="text-xl font-bold">Nutricionista IA</h3>
                   <p className="text-muted-foreground">Feedback em tempo real, sugestões de refeições e ajustes dinâmicos de metas.</p>
@@ -133,7 +132,7 @@ export default function Home() {
               <Card className="border-none shadow-md bg-white">
                 <CardContent className="p-6 flex flex-col items-center text-center space-y-4">
                   <div className="p-3 rounded-full bg-primary/10">
-                    <Activity className="h-8 w-8 text-primary" />
+                    <Activity className="h-8 w-8 text-primary" aria-hidden="true" />
                   </div>
                   <h3 className="text-xl font-bold">Módulo Oncológico</h3>
                   <p className="text-muted-foreground">Análise fisiológica avançada e prescrição segura para pacientes oncológicos.</p>
