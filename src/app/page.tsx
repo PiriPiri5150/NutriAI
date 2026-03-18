@@ -2,9 +2,10 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent } from '@/components/ui/card';
-import { Activity, Apple, BrainCircuit, ShieldCheck, LogOut, User, Menu } from 'lucide-react';
+import { Activity, Apple, BrainCircuit, User, Menu } from 'lucide-react';
 import { useUser, useAuth } from '@/firebase';
 import { signOut } from 'firebase/auth';
 import { SidebarTrigger } from '@/components/ui/sidebar';
@@ -86,10 +87,13 @@ export default function Home() {
               </div>
               <div className="flex items-center justify-center">
                 <div className="relative w-full aspect-square overflow-hidden rounded-2xl shadow-2xl">
-                  <img
-                    alt="NutriAI Hero"
-                    className="object-cover w-full h-full"
+                  <Image
                     src="https://picsum.photos/seed/nutriai/800/800"
+                    alt="NutriAI Hero"
+                    fill
+                    priority
+                    className="object-cover"
+                    data-ai-hint="healthy lifestyle"
                   />
                 </div>
               </div>
