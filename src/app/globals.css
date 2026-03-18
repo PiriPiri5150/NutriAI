@@ -4,19 +4,19 @@
 
 @layer base {
   :root {
-    --background: 210 33% 95%; /* #ECF1F6 */
+    --background: 210 33% 95%; /* #ECF1F6 - Light Grey Blue Background */
     --foreground: 222 47% 11%;
     --card: 0 0% 100%;
     --card-foreground: 222 47% 11%;
     --popover: 0 0% 100%;
     --popover-foreground: 222 47% 11%;
-    --primary: 211 71% 41%; /* #1F66B3 */
+    --primary: 211 71% 41%; /* #1F66B3 - NutriAI Primary Blue */
     --primary-foreground: 210 40% 98%;
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222 47% 11%;
     --muted: 210 40% 96.1%;
     --muted-foreground: 215 16% 47%;
-    --accent: 188 85% 56%; /* #2FD4ED */
+    --accent: 188 85% 56%; /* #2FD4ED - NutriAI Accent Cyan */
     --accent-foreground: 222 47% 11%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
@@ -24,21 +24,22 @@
     --input: 214.3 31.8% 91.4%;
     --ring: 211 71% 41%;
     --radius: 0.75rem;
+
+    /* Sidebar Variables - Specifically adjusted for NutriAI */
+    --sidebar-background: 0 0% 100%;
+    --sidebar-foreground: 222 47% 11%;
+    --sidebar-primary: 211 71% 41%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 211 71% 96%; /* Very light version of primary for hover */
+    --sidebar-accent-foreground: 211 71% 41%;
+    --sidebar-border: 214.3 31.8% 91.4%;
+    --sidebar-ring: 211 71% 41%;
+
     --chart-1: 211 71% 41%;
     --chart-2: 188 85% 56%;
     --chart-3: 197 37% 24%;
     --chart-4: 43 74% 66%;
     --chart-5: 27 87% 67%;
-
-    /* Sidebar Variables */
-    --sidebar-background: 0 0% 100%;
-    --sidebar-foreground: 222 47% 11%;
-    --sidebar-primary: 211 71% 41%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 210 40% 96.1%;
-    --sidebar-accent-foreground: 211 71% 41%;
-    --sidebar-border: 214.3 31.8% 91.4%;
-    --sidebar-ring: 211 71% 41%;
   }
 }
 
