@@ -23,7 +23,7 @@ export default function Home() {
       <header className="px-4 lg:px-6 h-16 flex items-center border-b bg-white/50 backdrop-blur-md sticky top-0 z-50">
         <div className="flex items-center gap-4">
           <SidebarTrigger>
-            <Button variant="ghost" size="icon" className="md:hidden">
+            <Button variant="ghost" size="icon" className="md:hidden" aria-label="Menu principal">
               <Menu className="h-6 w-6" />
             </Button>
           </SidebarTrigger>
@@ -44,7 +44,7 @@ export default function Home() {
               <div className="hidden sm:flex flex-col items-end">
                 <span className="text-xs font-bold text-primary">{user.email || 'Utilizador'}</span>
               </div>
-              <Link href="/profile">
+              <Link href="/profile" aria-label="Ver perfil">
                 <div className="h-8 w-8 rounded-full bg-primary/10 flex items-center justify-center border hover:border-primary transition-all">
                   <User className="h-4 w-4 text-primary" />
                 </div>
@@ -89,7 +89,7 @@ export default function Home() {
                 <div className="relative w-full aspect-square overflow-hidden rounded-2xl shadow-2xl">
                   <Image
                     src="https://picsum.photos/seed/nutriai/800/800"
-                    alt="NutriAI Hero"
+                    alt="Pessoa saudável praticando exercício ao ar livre representando o estilo de vida NutriAI"
                     fill
                     priority
                     className="object-cover"
