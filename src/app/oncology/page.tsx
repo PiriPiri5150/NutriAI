@@ -7,7 +7,7 @@ import { Button } from '@/components/ui/button';
 import { Activity, ShieldCheck, FileText, Info, Plus, Apple, Trash2, Calendar as CalendarIcon, Utensils, LogIn } from 'lucide-react';
 import { Alert, AlertDescription, AlertTitle } from '@/components/ui/alert';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter } from '@/components/ui/dialog';
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger, DialogFooter, DialogDescription } from '@/components/ui/dialog';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
@@ -19,10 +19,8 @@ export default function OncologyPage() {
   const firestore = useFirestore();
   const [selectedPlanId, setSelectedPlanId] = useState<string | null>(null);
 
-  // Use user.uid as the oncologyPatientDetailsId for a 1:1 relationship
   const patientDetailsId = user?.uid;
 
-  // Memoized query for nutritional plans
   const plansQuery = useMemoFirebase(() => {
     if (!firestore || !user?.uid || !patientDetailsId) return null;
     return collection(firestore, 'users', user.uid, 'oncologyPatientDetails', patientDetailsId, 'nutritionalPlans');
@@ -30,7 +28,6 @@ export default function OncologyPage() {
 
   const { data: plans, isLoading: isLoadingPlans } = useCollection(plansQuery);
 
-  // Memoized query for recommended foods of the selected plan
   const foodsQuery = useMemoFirebase(() => {
     if (!firestore || !user?.uid || !patientDetailsId || !selectedPlanId) return null;
     return collection(firestore, 'users', user.uid, 'oncologyPatientDetails', patientDetailsId, 'nutritionalPlans', selectedPlanId, 'recommendedFoods');
@@ -214,7 +211,6 @@ export default function OncologyPage() {
 
         <TabsContent value="nutrition" className="space-y-6">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-            {/* List of Plans */}
             <Card className="lg:col-span-1 h-fit">
               <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-4">
                 <CardTitle className="text-lg">Planos Nutricionais</CardTitle>
@@ -225,10 +221,13 @@ export default function OncologyPage() {
                     </Button>
                   </DialogTrigger>
                   <DialogContent className="max-w-md">
+                    <DialogHeader>
+                      <DialogTitle>Criar Novo Plano Nutricional</DialogTitle>
+                      <DialogDescription>
+                        Defina as metas e objetivos para o seu acompanhamento nutricional especializado.
+                      </DialogDescription>
+                    </DialogHeader>
                     <form onSubmit={handleAddPlan}>
-                      <DialogHeader>
-                        <DialogTitle>Criar Novo Plano Nutricional</DialogTitle>
-                      </DialogHeader>
                       <div className="grid gap-4 py-4">
                         <div className="space-y-2">
                           <Label>Nome do Plano</Label>
@@ -313,7 +312,6 @@ export default function OncologyPage() {
               </CardContent>
             </Card>
 
-            {/* Plan Details & Recommended Foods */}
             <Card className="lg:col-span-2">
               {selectedPlanId ? (
                 <>
@@ -332,10 +330,13 @@ export default function OncologyPage() {
                           </Button>
                         </DialogTrigger>
                         <DialogContent>
+                          <DialogHeader>
+                            <DialogTitle>Recomendar Alimento</DialogTitle>
+                            <DialogDescription>
+                              Adicione alimentos específicos recomendados para este plano clínico.
+                            </DialogDescription>
+                          </DialogHeader>
                           <form onSubmit={handleAddFood}>
-                            <DialogHeader>
-                              <DialogTitle>Recomendar Alimento</DialogTitle>
-                            </DialogHeader>
                             <div className="grid gap-4 py-4">
                               <div className="space-y-2">
                                 <Label>Alimento ou Categoria</Label>
@@ -368,7 +369,6 @@ export default function OncologyPage() {
                       </Dialog>
                     </div>
                     
-                    {/* Plan Summary Stats */}
                     {plans?.find(p => p.id === selectedPlanId) && (
                       <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                         <div className="p-2 rounded bg-white border">

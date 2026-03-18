@@ -20,7 +20,6 @@ import {
   Activity, 
   BrainCircuit,
   LogOut,
-  ChevronRight,
   ShieldCheck
 } from 'lucide-react';
 import Link from 'next/link';
@@ -39,8 +38,8 @@ export function AppSidebar() {
   };
 
   return (
-    <Sidebar className="border-r shadow-sm">
-      <SidebarHeader className="p-6 border-b bg-white">
+    <Sidebar className="border-r shadow-sm bg-sidebar">
+      <SidebarHeader className="p-6 border-b bg-sidebar">
         <Link href="/" className="flex items-center gap-2 group">
           <div className="p-1.5 rounded-lg bg-primary group-hover:bg-primary/90 transition-colors">
             <BrainCircuit className="h-6 w-6 text-white" />
@@ -49,7 +48,7 @@ export function AppSidebar() {
         </Link>
       </SidebarHeader>
 
-      <SidebarContent className="bg-white">
+      <SidebarContent className="bg-sidebar">
         <SidebarGroup>
           <SidebarGroupLabel className="px-4 text-[10px] uppercase font-bold tracking-widest text-muted-foreground/60 mb-2">
             Navegação Principal
@@ -63,7 +62,7 @@ export function AppSidebar() {
                 { label: 'Coach IA', href: '/ai-coach', icon: BrainCircuit },
               ].map((item) => (
                 <SidebarMenuItem key={item.href}>
-                  <SidebarMenuButton asChild tooltip={item.label} className="h-10 px-3">
+                  <SidebarMenuButton asChild tooltip={item.label} className="h-10 px-3 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
                     <Link href={item.href} className="flex items-center gap-3">
                       <item.icon className="h-4 w-4" />
                       <span className="font-medium">{item.label}</span>
@@ -82,7 +81,7 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu className="px-2">
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Perfil" className="h-10 px-3">
+                <SidebarMenuButton asChild tooltip="Perfil" className="h-10 px-3 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
                   <Link href="/profile" className="flex items-center gap-3">
                     <User className="h-4 w-4" />
                     <span className="font-medium">O Meu Perfil</span>
@@ -90,7 +89,7 @@ export function AppSidebar() {
                 </SidebarMenuButton>
               </SidebarMenuItem>
               <SidebarMenuItem>
-                <SidebarMenuButton asChild tooltip="Definições" className="h-10 px-3">
+                <SidebarMenuButton asChild tooltip="Definições" className="h-10 px-3 hover:bg-sidebar-accent hover:text-sidebar-accent-foreground">
                   <Link href="/settings" className="flex items-center gap-3">
                     <Settings className="h-4 w-4" />
                     <span className="font-medium">Definições</span>
@@ -102,10 +101,10 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
 
-      <SidebarFooter className="p-4 border-t bg-slate-50/50">
+      <SidebarFooter className="p-4 border-t bg-sidebar">
         {user ? (
           <div className="flex flex-col gap-3">
-            <div className="flex items-center gap-3 p-2 rounded-lg bg-white border shadow-sm">
+            <div className="flex items-center gap-3 p-2 rounded-lg bg-card border shadow-sm">
               <div className="h-9 w-9 rounded-full bg-primary/10 flex items-center justify-center shrink-0">
                 <User className="h-4 w-4 text-primary" />
               </div>
